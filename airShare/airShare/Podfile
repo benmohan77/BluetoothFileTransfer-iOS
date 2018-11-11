@@ -1,0 +1,8 @@
+platform :ios, '10.0'
+use_frameworks!
+
+project '../airShare.xcodeproj'
+
+target 'airShare' do
+    pod "BSImagePicker", "~> 2.8"
+end

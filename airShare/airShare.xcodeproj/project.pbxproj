@@ -1,0 +1,628 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B94595342198B42600B116B2 /* FileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94595332198B42600B116B2 /* FileList.swift */; };
+		B94595362198D17500B116B2 /* miniCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94595352198D17500B116B2 /* miniCollectionViewCell.swift */; };
+		B9BB68DF21935B590009FF7B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BB68DE21935B590009FF7B /* AppDelegate.swift */; };
+		B9BB68E121935B590009FF7B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BB68E021935B590009FF7B /* ViewController.swift */; };
+		B9BB68E421935B590009FF7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9BB68E221935B590009FF7B /* Main.storyboard */; };
+		B9BB68E621935B5A0009FF7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9BB68E521935B5A0009FF7B /* Assets.xcassets */; };
+		B9BB68E921935B5A0009FF7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9BB68E721935B5A0009FF7B /* LaunchScreen.storyboard */; };
+		B9BB68F721935C4D0009FF7B /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BB68F621935C4D0009FF7B /* ShareViewController.swift */; };
+		B9BB68FA21935C4D0009FF7B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B9BB68F821935C4D0009FF7B /* MainInterface.storyboard */; };
+		B9BB68FE21935C4D0009FF7B /* airShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B9BB68F421935C4D0009FF7B /* airShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B9BB690621987AD60009FF7B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = B9BB690521987AD60009FF7B /* Podfile */; };
+		B9BB6908219888840009FF7B /* AttachmentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BB6907219888830009FF7B /* AttachmentHandler.swift */; };
+		B9BB690A219896B10009FF7B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BB6909219896B10009FF7B /* Constants.swift */; };
+		B9BB690C21989E650009FF7B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BB690B21989E650009FF7B /* File.swift */; };
+		B9BB690E2198AA9D0009FF7B /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BB690D2198AA9D0009FF7B /* Photo.swift */; };
+		DDDC72202659954A12D190FE /* Pods_airShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6FEC89666B2560A692360E /* Pods_airShare.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B9BB68FC21935C4D0009FF7B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B9BB68D321935B590009FF7B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B9BB68F321935C4D0009FF7B;
+			remoteInfo = airShareExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B9BB690221935C4D0009FF7B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B9BB68FE21935C4D0009FF7B /* airShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		04528840A999AE35D8FDC54C /* Pods-airShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airShare.release.xcconfig"; path = "airShare/Pods/Target Support Files/Pods-airShare/Pods-airShare.release.xcconfig"; sourceTree = "<group>"; };
+		89B303D12A41F20EABAA28D0 /* Pods-airShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airShare.debug.xcconfig"; path = "airShare/Pods/Target Support Files/Pods-airShare/Pods-airShare.debug.xcconfig"; sourceTree = "<group>"; };
+		B94595332198B42600B116B2 /* FileList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileList.swift; sourceTree = "<group>"; };
+		B94595352198D17500B116B2 /* miniCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = miniCollectionViewCell.swift; sourceTree = "<group>"; };
+		B9BB68DB21935B590009FF7B /* airShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = airShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9BB68DE21935B590009FF7B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B9BB68E021935B590009FF7B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B9BB68E321935B590009FF7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B9BB68E521935B5A0009FF7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B9BB68E821935B5A0009FF7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B9BB68EA21935B5A0009FF7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9BB68F421935C4D0009FF7B /* airShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = airShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9BB68F621935C4D0009FF7B /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		B9BB68F921935C4D0009FF7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		B9BB68FB21935C4D0009FF7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B9BB690321935D250009FF7B /* airShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = airShareExtension.entitlements; sourceTree = "<group>"; };
+		B9BB690421935D430009FF7B /* airShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = airShare.entitlements; sourceTree = "<group>"; };
+		B9BB690521987AD60009FF7B /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B9BB6907219888830009FF7B /* AttachmentHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentHandler.swift; sourceTree = "<group>"; };
+		B9BB6909219896B10009FF7B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B9BB690B21989E650009FF7B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		B9BB690D2198AA9D0009FF7B /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		DC6FEC89666B2560A692360E /* Pods_airShare.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_airShare.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B9BB68D821935B590009FF7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDDC72202659954A12D190FE /* Pods_airShare.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9BB68F121935C4D0009FF7B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19D2A01D9DC94BE9C3F04287 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				89B303D12A41F20EABAA28D0 /* Pods-airShare.debug.xcconfig */,
+				04528840A999AE35D8FDC54C /* Pods-airShare.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B94595322198B3D500B116B2 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				B9BB6909219896B10009FF7B /* Constants.swift */,
+				B9BB690B21989E650009FF7B /* File.swift */,
+				B9BB690D2198AA9D0009FF7B /* Photo.swift */,
+				B94595332198B42600B116B2 /* FileList.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		B9BB68D221935B590009FF7B = {
+			isa = PBXGroup;
+			children = (
+				B9BB68DD21935B590009FF7B /* airShare */,
+				B9BB68F521935C4D0009FF7B /* airShareExtension */,
+				B9BB68DC21935B590009FF7B /* Products */,
+				19D2A01D9DC94BE9C3F04287 /* Pods */,
+				BBF455B100C8CD39DC0E4F96 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B9BB68DC21935B590009FF7B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B9BB68DB21935B590009FF7B /* airShare.app */,
+				B9BB68F421935C4D0009FF7B /* airShareExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B9BB68DD21935B590009FF7B /* airShare */ = {
+			isa = PBXGroup;
+			children = (
+				B9BB6907219888830009FF7B /* AttachmentHandler.swift */,
+				B9BB690421935D430009FF7B /* airShare.entitlements */,
+				B9BB68DE21935B590009FF7B /* AppDelegate.swift */,
+				B9BB68E021935B590009FF7B /* ViewController.swift */,
+				B94595352198D17500B116B2 /* miniCollectionViewCell.swift */,
+				B9BB68E221935B590009FF7B /* Main.storyboard */,
+				B9BB68E521935B5A0009FF7B /* Assets.xcassets */,
+				B9BB68E721935B5A0009FF7B /* LaunchScreen.storyboard */,
+				B9BB68EA21935B5A0009FF7B /* Info.plist */,
+				B9BB690521987AD60009FF7B /* Podfile */,
+				B94595322198B3D500B116B2 /* Objects */,
+			);
+			path = airShare;
+			sourceTree = "<group>";
+		};
+		B9BB68F521935C4D0009FF7B /* airShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				B9BB690321935D250009FF7B /* airShareExtension.entitlements */,
+				B9BB68F621935C4D0009FF7B /* ShareViewController.swift */,
+				B9BB68F821935C4D0009FF7B /* MainInterface.storyboard */,
+				B9BB68FB21935C4D0009FF7B /* Info.plist */,
+			);
+			path = airShareExtension;
+			sourceTree = "<group>";
+		};
+		BBF455B100C8CD39DC0E4F96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC6FEC89666B2560A692360E /* Pods_airShare.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B9BB68DA21935B590009FF7B /* airShare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9BB68ED21935B5A0009FF7B /* Build configuration list for PBXNativeTarget "airShare" */;
+			buildPhases = (
+				4FEDBB017ACCB699814CEE57 /* [CP] Check Pods Manifest.lock */,
+				B9BB68D721935B590009FF7B /* Sources */,
+				B9BB68D821935B590009FF7B /* Frameworks */,
+				B9BB68D921935B590009FF7B /* Resources */,
+				B9BB690221935C4D0009FF7B /* Embed App Extensions */,
+				7286196CB0E15312D03B17B4 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B9BB68FD21935C4D0009FF7B /* PBXTargetDependency */,
+			);
+			name = airShare;
+			productName = airShare;
+			productReference = B9BB68DB21935B590009FF7B /* airShare.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B9BB68F321935C4D0009FF7B /* airShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9BB68FF21935C4D0009FF7B /* Build configuration list for PBXNativeTarget "airShareExtension" */;
+			buildPhases = (
+				B9BB68F021935C4D0009FF7B /* Sources */,
+				B9BB68F121935C4D0009FF7B /* Frameworks */,
+				B9BB68F221935C4D0009FF7B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = airShareExtension;
+			productName = airShareExtension;
+			productReference = B9BB68F421935C4D0009FF7B /* airShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B9BB68D321935B590009FF7B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "Tyler Gaffaney";
+				TargetAttributes = {
+					B9BB68DA21935B590009FF7B = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+					B9BB68F321935C4D0009FF7B = {
+						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = B9BB68D621935B590009FF7B /* Build configuration list for PBXProject "airShare" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B9BB68D221935B590009FF7B;
+			productRefGroup = B9BB68DC21935B590009FF7B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B9BB68DA21935B590009FF7B /* airShare */,
+				B9BB68F321935C4D0009FF7B /* airShareExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B9BB68D921935B590009FF7B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9BB68E921935B5A0009FF7B /* LaunchScreen.storyboard in Resources */,
+				B9BB68E621935B5A0009FF7B /* Assets.xcassets in Resources */,
+				B9BB690621987AD60009FF7B /* Podfile in Resources */,
+				B9BB68E421935B590009FF7B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9BB68F221935C4D0009FF7B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9BB68FA21935C4D0009FF7B /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4FEDBB017ACCB699814CEE57 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-airShare-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7286196CB0E15312D03B17B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/airShare/Pods/Target Support Files/Pods-airShare/Pods-airShare-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BSGridCollectionViewLayout/BSGridCollectionViewLayout.framework",
+				"${BUILT_PRODUCTS_DIR}/BSImagePicker/BSImagePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/BSImageView/BSImageView.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSGridCollectionViewLayout.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSImagePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BSImageView.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/airShare/Pods/Target Support Files/Pods-airShare/Pods-airShare-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B9BB68D721935B590009FF7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9BB690E2198AA9D0009FF7B /* Photo.swift in Sources */,
+				B9BB690C21989E650009FF7B /* File.swift in Sources */,
+				B94595362198D17500B116B2 /* miniCollectionViewCell.swift in Sources */,
+				B9BB68E121935B590009FF7B /* ViewController.swift in Sources */,
+				B94595342198B42600B116B2 /* FileList.swift in Sources */,
+				B9BB6908219888840009FF7B /* AttachmentHandler.swift in Sources */,
+				B9BB68DF21935B590009FF7B /* AppDelegate.swift in Sources */,
+				B9BB690A219896B10009FF7B /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B9BB68F021935C4D0009FF7B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9BB68F721935C4D0009FF7B /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B9BB68FD21935C4D0009FF7B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B9BB68F321935C4D0009FF7B /* airShareExtension */;
+			targetProxy = B9BB68FC21935C4D0009FF7B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B9BB68E221935B590009FF7B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9BB68E321935B590009FF7B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B9BB68E721935B5A0009FF7B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9BB68E821935B5A0009FF7B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B9BB68F821935C4D0009FF7B /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B9BB68F921935C4D0009FF7B /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B9BB68EB21935B5A0009FF7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B9BB68EC21935B5A0009FF7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B9BB68EE21935B5A0009FF7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89B303D12A41F20EABAA28D0 /* Pods-airShare.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = airShare/airShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LDTX3MW38L;
+				INFOPLIST_FILE = airShare/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tylergaffaney.airShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B9BB68EF21935B5A0009FF7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04528840A999AE35D8FDC54C /* Pods-airShare.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = airShare/airShare.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LDTX3MW38L;
+				INFOPLIST_FILE = airShare/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tylergaffaney.airShare;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B9BB690021935C4D0009FF7B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = airShareExtension/airShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LDTX3MW38L;
+				INFOPLIST_FILE = airShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tylergaffaney.airShare.airShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B9BB690121935C4D0009FF7B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = airShareExtension/airShareExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LDTX3MW38L;
+				INFOPLIST_FILE = airShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.tylergaffaney.airShare.airShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B9BB68D621935B590009FF7B /* Build configuration list for PBXProject "airShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9BB68EB21935B5A0009FF7B /* Debug */,
+				B9BB68EC21935B5A0009FF7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B9BB68ED21935B5A0009FF7B /* Build configuration list for PBXNativeTarget "airShare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9BB68EE21935B5A0009FF7B /* Debug */,
+				B9BB68EF21935B5A0009FF7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B9BB68FF21935C4D0009FF7B /* Build configuration list for PBXNativeTarget "airShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9BB690021935C4D0009FF7B /* Debug */,
+				B9BB690121935C4D0009FF7B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B9BB68D321935B590009FF7B /* Project object */;
+}
