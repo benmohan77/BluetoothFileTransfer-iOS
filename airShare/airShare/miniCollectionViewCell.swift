@@ -22,25 +22,27 @@ class MiniCollectionViewCell: UICollectionViewCell {
     
     func setup(_ file: File, deleteHandler: @escaping ((String)->())) {
         self.file = file
-        label.text = file.name
+        label.text = ""//file.name
         self.deleteHandler = deleteHandler
         switch file.type {
         case .photo:
+            
             let photo = file as! Photo
             image.image = getAssetThumbnail(asset: photo.image)
+            break
         default:
-            print()
+            print("Non photo")
         }
         
     }
     
     func getAssetThumbnail(asset: PHAsset) -> UIImage {
         let size = CGSize(width: 65, height: 90)
-        //let retinaScale = UIScreen.main.scale
-        //let retineSquare = CGSize(width: size.width, height: size.height * retinaScale)
-        //let cropSizeLength = min(asset.pixelWidth, asset.pixelHeight)
-        //let square = CGRect(x: 0, y: 0, width: CGFloat(cropSizeLength), height: CGFloat(cropSizeLength))
-        //let cropRect = square.applying(CGAffineTransform(scaleX: 1.0/CGFloat(asset.pixelWidth), y: 1.0/CGFloat(asset.pixelHeight)))
+//        let retinaScale = UIScreen.main.scale
+//        let retineSquare = CGSize(width: size.width, height: size.height * retinaScale)
+//        let cropSizeLength = min(asset.pixelWidth, asset.pixelHeight)
+//        let square = CGRect(x: 0, y: 0, width: CGFloat(cropSizeLength), height: CGFloat(cropSizeLength))
+//        let cropRect = square.applying(CGAffineTransform(scaleX: 1.0/CGFloat(asset.pixelWidth), y: 1.0/CGFloat(asset.pixelHeight)))
         let manager = PHImageManager.default()
         let options = PHImageRequestOptions()
         var thumbnail = UIImage()

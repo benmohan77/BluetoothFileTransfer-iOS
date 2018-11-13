@@ -22,25 +22,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     private var actionSheetIsPresented: Bool = false
     var list: FileList!
 
+    @IBAction func removeAllAction(_ sender: Any) {
+        let impact = UIImpactFeedbackGenerator()
+        impact.impactOccurred()
+        let action = UIAlertController(title: "Remove All", message: "Are you sure you want to deselect all of the files? (This does not delete them from your device)", preferredStyle: .alert)
+        action.addAction(UIAlertAction(title: "Remove All", style: .destructive) { (ac) in
+                self.list.removeAll()
+            })
+        action.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (ac) in
+            action.dismiss(animated: true, completion: nil)
+        }))
+        self.present(action, animated: true, completion: nil)
+    }
+    @IBAction func shareAction(_ sender: Any) {
+        let impact = UIImpactFeedbackGenerator()
+        impact.impactOccurred()
+    }
+    @IBOutlet weak var share: UIButton!
     @IBOutlet weak var CollectionWrapper: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var sizeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var mediaButton: UIButton!
     @IBAction func mediaButtonAction(_ sender: Any) {
-        let impact = UIImpactFeedbackGenerator()
-        impact.impactOccurred()
+        DispatchQueue.main.async {
+            let impact = UIImpactFeedbackGenerator()
+            impact.impactOccurred()
+        }
+        
         if(!actionSheetIsPresented){
             self.present(actionSheet, animated: true, completion: {
                 self.actionSheetIsPresented = false
             })
             actionSheetIsPresented = true
         }
-        
-        
-        
-        
-        
 //        let vc = BSImagePickerViewController()
 //        vc.settings.maxNumberOfSelections = 200
 //
@@ -95,28 +110,33 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         self.CollectionWrapper.alpha = 1
                     }) { (val) in
                         self.collectionView.reloadData()
+                        print("1")
                         self.CollectionWrapper.isUserInteractionEnabled = true
                     }
                 }else{
-                    self.collectionView.reloadData()
-                    self.CollectionWrapper.isUserInteractionEnabled = true
                     self.updateListLabels()
+                    self.collectionView.reloadData()
+                    print("2")
+                    self.CollectionWrapper.isUserInteractionEnabled = true
                 }
             }else{
                 UIView.animate(withDuration: 0.2, animations: {
                     self.CollectionWrapper.alpha = 0
                 }) { (val) in
-                    self.collectionView.reloadData()
-                    self.CollectionWrapper.isUserInteractionEnabled = false
                     self.updateListLabels()
+                    self.collectionView.reloadData()
+                    print("3")
+                    self.CollectionWrapper.isUserInteractionEnabled = false
                 }
             }
         }
     }
     
     func handleAction(_ fileType: Types){
-        let impact = UIImpactFeedbackGenerator()
-        impact.impactOccurred()
+        DispatchQueue.main.async {
+            let impact = UIImpactFeedbackGenerator()
+            impact.impactOccurred()
+        }
         switch fileType {
         case .camera:
             // FIXME
@@ -167,9 +187,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func removeFile(with identifier: String){
         
         if list.count > 1 {
-            let index = list.indexOf(identifier: identifier)
-            self.list.removeFile(identifier: identifier)
-            collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+            var index = 0
+            measure("list.indexOf") { finish in
+                index = list.indexOf(identifier: identifier)
+                finish()
+            }
+            measure("removeFile") { finish in
+                self.list.removeFile(identifier: identifier)
+                finish()
+            }
+            measure("deleteItems") { finish in
+                collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+                finish()
+            }
+            
             updateListLabels()
         }else{
             self.list.removeFile(identifier: identifier)
@@ -179,9 +210,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func updateListLabels(){
         DispatchQueue.main.async {
-            let size = self.list.getFileSize()
-            let text = FileList.converByteToHumanReadable(size)
-            self.sizeLabel.text = "Size: \(text)"
+            let count = self.list.count
+            if count == 1 {
+                self.share.setTitle("Share \(count) file", for: .normal)
+            }else{
+                self.share.setTitle("Share \(count) files", for: .normal)
+            }
+            let iWidth = self.share.intrinsicContentSize.width
+            let iHeight = self.share.intrinsicContentSize.height
+            let widthContraints =  NSLayoutConstraint(item: self.share, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: iWidth + 40)
+            let heightContraints = NSLayoutConstraint(item: self.share, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: iHeight + 10)
+            NSLayoutConstraint.activate([heightContraints,widthContraints])
+            self.share.layer.cornerRadius = 10
+            self.share.layer.masksToBounds = true
+
         }
         
     }
@@ -207,6 +249,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     {
         return CGSize(width: 65, height: 142)
     }
+    
+    func measure(_ title: String, block: (() -> ()) -> ()) {
+        
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
+        block {
+            let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
+            print("\(title):: Time: \(timeElapsed)")
+        }
+    }
 }
 
-
+public extension UIImage {
+    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
+}

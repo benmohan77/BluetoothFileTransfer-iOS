@@ -35,12 +35,13 @@ class FileList {
         updateFunction = update
     }
     
-    func getFileSize() -> Int64 {
+    func getFileSize() {
         var size: Int64 = 0
         for element in list {
-            size += element.getSize()
+            let val = element.getSize()
+            size += val
         }
-        return size
+        //return size
     }
     
     static func converByteToHumanReadable(_ bytes:Int64) -> String {
@@ -75,7 +76,9 @@ class FileList {
             }else{
                 photoDictionary.removeValue(forKey: photo.identifier)
             }
-            nd[photo.identifier] = ""
+            
+            let id = photo.identifier
+            nd[id] = " "
         }
         
         for key in photoDictionary.keys {
@@ -109,6 +112,13 @@ class FileList {
     
     func removeFile(index: Int){
         // FIXME
+    }
+    
+    
+    func removeAll(){
+        photoDictionary = Dictionary<String,String>()
+        list = [File]()
+        updateDependant()
     }
     
     func addDocument(_ document: File){

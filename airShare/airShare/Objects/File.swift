@@ -37,7 +37,7 @@ class File {
     
     //In Bytes
     func getSize() -> Int64 {
-        return -1
+        return 0
     }
     
     init(name: String, ext: String, id: String, type: FileType) {
