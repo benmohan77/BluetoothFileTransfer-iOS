@@ -14,9 +14,6 @@ import Photos
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     
-    
-    
-    
     private var selectedFiles: [File]!
     private var actionSheet: UIAlertController!
     private var actionSheetIsPresented: Bool = false
@@ -77,6 +74,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func viewDidLoad() {
+        //Bluetooth Stuff
+        BTPeripheralManagerService.instance
+//        BTCentralManagerService.instance
+        
+        
         self.CollectionWrapper.alpha = 0
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
