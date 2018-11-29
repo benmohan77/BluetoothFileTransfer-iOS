@@ -9,10 +9,10 @@
 import UIKit
 import CoreBluetooth
 
-class PeripheralManagerViewController: UIViewController, CBPeripheralManagerDelegate, UITextViewDelegate {
+class PeripheralManager: NSObject, CBPeripheralManagerDelegate, UITextViewDelegate {
 
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var advertisingSwitch: UISwitch!
+//    @IBOutlet weak var textView: UITextView!
+//    @IBOutlet weak var advertisingSwitch: UISwitch!
     
     var peripheralManager:CBPeripheralManager?
     var transferCharacteristic:CBMutableCharacteristic?
@@ -24,38 +24,43 @@ class PeripheralManagerViewController: UIViewController, CBPeripheralManagerDele
     var currentTextSnapshot = ""
     var sendingTextData = false
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.advertisingSwitch.isOn = false
-        
-        self.textView.layer.borderColor = UIColor.lightGray.cgColor
-        self.textView.layer.borderWidth = 1.0
-        self.textView.delegate = self
-        
-        // Create and start the peripheral manager
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        self.advertisingSwitch.isOn = false
+//
+//        self.textView.layer.borderColor = UIColor.lightGray.cgColor
+//        self.textView.layer.borderWidth = 1.0
+//        self.textView.delegate = self
+//
+//        // Create and start the peripheral manager
+//        self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        // turn off advertising when the view goes away
+//        self.peripheralManager?.stopAdvertising()
+//        self.peripheralManager = nil
+//        super.viewWillDisappear(animated)
+//    }
+    
+    
+    override init() {
+        super.init()
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        // turn off advertising when the view goes away
-        self.peripheralManager?.stopAdvertising()
-        self.peripheralManager = nil
-        super.viewWillDisappear(animated)
-    }
-    
-    
-    // MARK: - Handling User Interactions
-    
-    @IBAction func handleAdvertisingSwitchValueChanged(_ sender: UISwitch) {
-        print("switch: \(sender.isOn ? "ON" : "OFF")")
-        if sender.isOn {
-            print("Peripheral Manager: Starting Advertising Transfer Service (\(Device.TransferService))")
-            peripheralManager?.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
-        } else {
-            print("Peripheral Manager: Stopping Advertising!!!")
-            peripheralManager?.stopAdvertising()
-        }
-    }
+//    // MARK: - Handling User Interactions
+//
+//    @IBAction func handleAdvertisingSwitchValueChanged(_ sender: UISwitch) {
+//        print("switch: \(sender.isOn ? "ON" : "OFF")")
+//        if sender.isOn {
+//            print("Peripheral Manager: Starting Advertising Transfer Service (\(Device.TransferService))")
+//            peripheralManager?.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
+//        } else {
+//            print("Peripheral Manager: Stopping Advertising!!!")
+//            peripheralManager?.stopAdvertising()
+//        }
+//    }
 
     
     // MARK: Data Transfer Methods
@@ -67,24 +72,24 @@ class PeripheralManagerViewController: UIViewController, CBPeripheralManagerDele
         sendDataIndex = 0
     }
     
-    func captureCurrentText() {
-        print("captureCurrentText")
-        
-        // if we are not sending right now, capture the current state
-        if (!sendingTextData) && (currentTextSnapshot != textView.text)  {
-            print("Not currently sending data. Capturing snapshot and will send it over!")
-            currentTextSnapshot = textView.text
-            dataToSend = currentTextSnapshot.data(using: String.Encoding.utf8)
-            sendDataIndex = 0
-            sendTextData()
-        } else {
-            print("Currently sending data. Will wait to capture in a second...")
-        }
-        
-        // set a timer to check again in 1 second...
-//        print("Scheduling new timer: \(Date())")
-//        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(captureCurrentText), userInfo: nil, repeats: false)
-    }
+//    func captureCurrentText() {
+//        print("captureCurrentText")
+//
+//        // if we are not sending right now, capture the current state
+//        if (!sendingTextData) && (currentTextSnapshot != textView.text)  {
+//            print("Not currently sending data. Capturing snapshot and will send it over!")
+////            currentTextSnapshot = textView.text
+//            dataToSend = currentTextSnapshot.data(using: String.Encoding.utf8)
+//            sendDataIndex = 0
+//            sendTextData()
+//        } else {
+//            print("Currently sending data. Will wait to capture in a second...")
+//        }
+//
+//        // set a timer to check again in 1 second...
+////        print("Scheduling new timer: \(Date())")
+////        _ = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(captureCurrentText), userInfo: nil, repeats: false)
+//    }
     
     func sendTextData() {
         print("Attempting to send data...")
@@ -237,7 +242,7 @@ class PeripheralManagerViewController: UIViewController, CBPeripheralManagerDele
      */
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
         print("Central has subscribed to characteristic: \(central)")
-        captureCurrentText()
+//        captureCurrentText()
     }
     
     /*

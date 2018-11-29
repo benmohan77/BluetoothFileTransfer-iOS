@@ -14,7 +14,7 @@
 		B2FF9C7C21B07CC600FAE9FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2FF9C7A21B07CC600FAE9FC /* LaunchScreen.storyboard */; };
 		B2FF9C8421B07D0100FAE9FC /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8321B07D0100FAE9FC /* Device.swift */; };
 		B2FF9C8821B07D7900FAE9FC /* CentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8521B07D7900FAE9FC /* CentralManager.swift */; };
-		B2FF9C8921B07D7900FAE9FC /* PeripheralManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8621B07D7900FAE9FC /* PeripheralManagerViewController.swift */; };
+		B2FF9C8921B07D7900FAE9FC /* PeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8621B07D7900FAE9FC /* PeripheralManager.swift */; };
 		B2FF9C8A21B07D7900FAE9FC /* ManagerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8721B07D7900FAE9FC /* ManagerSelectionViewController.swift */; };
 		B2FF9C8F21B082BF00FAE9FC /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8E21B082BF00FAE9FC /* UserCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +29,7 @@
 		B2FF9C7D21B07CC600FAE9FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2FF9C8321B07D0100FAE9FC /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		B2FF9C8521B07D7900FAE9FC /* CentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManager.swift; sourceTree = "<group>"; };
-		B2FF9C8621B07D7900FAE9FC /* PeripheralManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralManagerViewController.swift; sourceTree = "<group>"; };
+		B2FF9C8621B07D7900FAE9FC /* PeripheralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralManager.swift; sourceTree = "<group>"; };
 		B2FF9C8721B07D7900FAE9FC /* ManagerSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerSelectionViewController.swift; sourceTree = "<group>"; };
 		B2FF9C8E21B082BF00FAE9FC /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,13 +65,13 @@
 			isa = PBXGroup;
 			children = (
 				B2FF9C8B21B07E3200FAE9FC /* Bluetooth */,
-				B2FF9C7121B07CC500FAE9FC /* AppDelegate.swift */,
 				B2FF9C7321B07CC500FAE9FC /* ViewController.swift */,
 				B2FF9C7521B07CC500FAE9FC /* Main.storyboard */,
 				B2FF9C7821B07CC600FAE9FC /* Assets.xcassets */,
 				B2FF9C7A21B07CC600FAE9FC /* LaunchScreen.storyboard */,
 				B2FF9C7D21B07CC600FAE9FC /* Info.plist */,
 				B2FF9C8E21B082BF00FAE9FC /* UserCollectionViewCell.swift */,
+				B2FF9C7121B07CC500FAE9FC /* AppDelegate.swift */,
 			);
 			path = "AirShare 2.0";
 			sourceTree = "<group>";
@@ -82,7 +82,7 @@
 				B2FF9C8321B07D0100FAE9FC /* Device.swift */,
 				B2FF9C8721B07D7900FAE9FC /* ManagerSelectionViewController.swift */,
 				B2FF9C8521B07D7900FAE9FC /* CentralManager.swift */,
-				B2FF9C8621B07D7900FAE9FC /* PeripheralManagerViewController.swift */,
+				B2FF9C8621B07D7900FAE9FC /* PeripheralManager.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -162,7 +162,7 @@
 				B2FF9C8A21B07D7900FAE9FC /* ManagerSelectionViewController.swift in Sources */,
 				B2FF9C8421B07D0100FAE9FC /* Device.swift in Sources */,
 				B2FF9C7421B07CC500FAE9FC /* ViewController.swift in Sources */,
-				B2FF9C8921B07D7900FAE9FC /* PeripheralManagerViewController.swift in Sources */,
+				B2FF9C8921B07D7900FAE9FC /* PeripheralManager.swift in Sources */,
 				B2FF9C8F21B082BF00FAE9FC /* UserCollectionViewCell.swift in Sources */,
 				B2FF9C7221B07CC500FAE9FC /* AppDelegate.swift in Sources */,
 			);

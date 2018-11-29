@@ -14,6 +14,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet var collectionView: UICollectionView!
     
     var centralManager : CentralManager?
+    var peripheralManager : PeripheralManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         //Bluetooth
         centralManager = CentralManager.init()
+        peripheralManager = PeripheralManager.init()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
