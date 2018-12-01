@@ -41,11 +41,13 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         
         // if we are not sending right now, capture the current state
         if !sendingTextData {
-            print("Not currently sending data. Capturing snapshot and will send it over!")
+//            print("Not currently sending data. Capturing snapshot and will send it over!")
             count += 1
             currentTextSnapshot = testText + " \(count)"
 //            dataToSend = currentTextSnapshot.data(using: String.Encoding.utf8)
-            dataToSend = UIImage(named: "ExampleFile")?.pngData()
+//            dataToSend = UIImage(named: "ExampleFile")!.pngData()
+//            dataToSend = UIImage(named: "Image")!.pngData()
+            dataToSend = UIImage(named: "Image2")!.pngData()
             
             sendDataIndex = 0
             sendTextData()
@@ -55,7 +57,7 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     }
     
     func sendTextData() {
-        print("Attempting to send data...")
+//        print("Attempting to send data...")
         
         guard let peripheralManager = self.peripheralManager else {
             print("No peripheral manager!!!")
@@ -101,7 +103,7 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
             sendingTextData = true
             
             // ---- Prepare the next message chunk
-            print("Preparing next message chunk...")
+//            print("Preparing next message chunk...")
             
             // Determine chunk size
             var amountToSend = dataToSend.count - sendDataIndex
@@ -114,15 +116,15 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
             
             // extract the data we want to send
             let upToIndex = sendDataIndex + amountToSend
-            print("Next Chunk should be \(amountToSend) bytes long and goes from \(sendDataIndex) to \(upToIndex)")
+//            print("Next Chunk should be \(amountToSend) bytes long and goes from \(sendDataIndex) to \(upToIndex)")
 
             // verify chunk length
             let chunk = dataToSend.subdata(in: sendDataIndex ..< upToIndex)
-            print("Next Chunk is \(chunk.count) bytes long.")
+//            print("Next Chunk is \(chunk.count) bytes long.")
             
             // output the chunk to see if we got the right block of text...
-            let chunkText = String(data: chunk, encoding: String.Encoding.utf8)
-            print("Next Chunk from data: \(chunkText)")
+//            let chunkText = String(data: chunk, encoding: String.Encoding.utf8)
+//            print("Next Chunk from data: \(chunkText)")
             
             // Send the chunk of text...
             // updateValue sends an updated characteristic value to one or more subscribed centrals via a notification.
@@ -134,9 +136,9 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
                 return
             }
             
-            if let stringFromData = String.init(data: chunk, encoding: String.Encoding.utf8) {
-                print("Sent: \(stringFromData)")
-            }
+//            if let stringFromData = String.init(data: chunk, encoding: String.Encoding.utf8) {
+//                print("Sent: \(stringFromData)")
+//            }
             
             // It did send, so update our index
             self.sendDataIndex += amountToSend;

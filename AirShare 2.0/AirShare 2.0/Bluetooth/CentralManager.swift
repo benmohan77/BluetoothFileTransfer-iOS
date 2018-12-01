@@ -284,8 +284,8 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 //    }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        print("didUpdateValueForCharacteristic: \(Date())")
-        1
+//        print("didUpdateValueForCharacteristic: \(Date())")
+        
         // if there was an error then print it and bail out
         if error != nil {
             print("Error updating value for characteristic: \(characteristic) - \(error?.localizedDescription)")
@@ -298,34 +298,40 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         
-        print("Bytes transferred: \(value.count)")
+//        print("Bytes transferred: \(value.count)")
         
         // make sure we have a characteristic value
-        guard let nextChunk = String(data: value, encoding: String.Encoding.utf8) else {
-            print("Next chunk of data is nil.")
-            return
-        }
-        
-        print("Next chunk: \(nextChunk)")
-        
-        // If we get the EOM tag, we fill the text view
-        if (nextChunk == Device.EOM) {
-            if let message = String(data: dataBuffer as Data, encoding: String.Encoding.utf8) {
-//                textView.text = message
-                print("Final message: \(message)")
+        if let checkEOM = String(data: value, encoding: String.Encoding.utf8){
+            if checkEOM == Device.EOM{
+                print("Finished")
                 myData = dataBuffer as Data
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatedData"), object: nil)
-                
-                // truncate our buffer now that we received the EOM signal!
                 dataBuffer.length = 0
+            }else{
+                dataBuffer.append(value)
             }
-        } else {
+        }else{
             dataBuffer.append(value)
-            print("Next chunk received: \(nextChunk)")
-            if let buffer = self.dataBuffer {
-                print("Transfer buffer: \(String(data: buffer as Data, encoding: String.Encoding.utf8))")
-            }
+////            print("Next chunk received: \(value)")
+//            if let buffer = self.dataBuffer {
+//                print("Transfer buffer: \(String(data: buffer as Data, encoding: String.Encoding.utf8))")
+//            }
         }
+        
+//        // If we get the EOM tag, we fill the text view
+//        if (nextChunk == Device.EOM) {
+//
+//            myData = dataBuffer as Data
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatedData"), object: nil)
+//            dataBuffer.length = 0
+//
+//        } else {
+//            dataBuffer.append(value)
+//            print("Next chunk received: \(nextChunk)")
+//            if let buffer = self.dataBuffer {
+//                print("Transfer buffer: \(String(data: buffer as Data, encoding: String.Encoding.utf8))")
+//            }
+//        }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {

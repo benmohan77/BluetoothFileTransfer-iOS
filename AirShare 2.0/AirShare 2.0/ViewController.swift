@@ -27,7 +27,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        
         //Bluetooth
         centralManager = CentralManager.init()
         peripheralManager = PeripheralManager2.init()
@@ -62,8 +61,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     @ objc func updatedData(notif: NSNotification){
         //var message = String(data: centralManager!.myData!, encoding: .utf8)
+        var data = centralManager!.myData!
         
-        var image = UIImage.init(data: centralManager!.myData!)
+        var image = UIImage.init(data: data)
         
         imageView.image = image
 //        textView!.text = message
