@@ -1,25 +1,27 @@
-//
-//  ViewController.swift
-//  AirShare 2.0
-//
-//  Created by Aaron Sletten on 11/29/18.
-//  Copyright © 2018 Tyler Gaffaney Inc. All rights reserved.
-//
-
 import UIKit
 import CoreBluetooth
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-
+    @IBOutlet var textView: UITextView!
     @IBOutlet var collectionView: UICollectionView!
+
+    @IBOutlet var imageView: UIImageView!
+    
+    @IBAction func testButton(_ sender: Any) {
+        peripheralManager?.updateValue()
+    }
     
     var centralManager : CentralManager?
-    var peripheralManager : PeripheralManager?
+    var peripheralManager : PeripheralManager2?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updatePeripherals), name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updatePeripheralNames), name: NSNotification.Name(rawValue: "updatePeripheralNames"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updatedData), name: NSNotification.Name(rawValue: "updatedData"), object: nil)
         
         // Do any additional setup after loading the view, typically from a nib.
         collectionView.delegate = self
@@ -28,7 +30,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         //Bluetooth
         centralManager = CentralManager.init()
-        peripheralManager = PeripheralManager.init()
+        peripheralManager = PeripheralManager2.init()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -39,7 +41,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as! UserCollectionViewCell
         
-        if let name = (Array(centralManager!.peripherals!)[indexPath.row] as! CBPeripheral).name{
+        let myPeripheral = Array(centralManager!.myPeripherals!)[indexPath.row] as! MyPeripheral
+        
+        if let name = myPeripheral.name{
             cell.userNameLabel.text = name
         }else{
             cell.userNameLabel.text = "No Name"
@@ -49,9 +53,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     @ objc func updatePeripherals(notif: NSNotification) {
-        //Insert code here
-//        self.tableView.reloadData()
         self.collectionView.reloadData()
+    }
+    
+    @ objc func updatePeripheralNames(notif: NSNotification){
+        self.collectionView.reloadData()
+    }
+    
+    @ objc func updatedData(notif: NSNotification){
+        //var message = String(data: centralManager!.myData!, encoding: .utf8)
+        
+        var image = UIImage.init(data: centralManager!.myData!)
+        
+        imageView.image = image
+//        textView!.text = message
     }
 }
 

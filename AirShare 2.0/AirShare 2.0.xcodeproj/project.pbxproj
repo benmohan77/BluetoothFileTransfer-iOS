@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B24769FB21B201C200293CB1 /* CentralManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24769F921B201C200293CB1 /* CentralManagerViewController.swift */; };
+		B24769FC21B201C200293CB1 /* PeripheralManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B24769FA21B201C200293CB1 /* PeripheralManager2.swift */; };
+		B24769FE21B20D6900293CB1 /* ExampleFile.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = B24769FD21B20D6900293CB1 /* ExampleFile.jpeg */; };
 		B2FF9C7221B07CC500FAE9FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C7121B07CC500FAE9FC /* AppDelegate.swift */; };
 		B2FF9C7421B07CC500FAE9FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C7321B07CC500FAE9FC /* ViewController.swift */; };
 		B2FF9C7721B07CC500FAE9FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2FF9C7521B07CC500FAE9FC /* Main.storyboard */; };
@@ -15,11 +18,14 @@
 		B2FF9C8421B07D0100FAE9FC /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8321B07D0100FAE9FC /* Device.swift */; };
 		B2FF9C8821B07D7900FAE9FC /* CentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8521B07D7900FAE9FC /* CentralManager.swift */; };
 		B2FF9C8921B07D7900FAE9FC /* PeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8621B07D7900FAE9FC /* PeripheralManager.swift */; };
-		B2FF9C8A21B07D7900FAE9FC /* ManagerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8721B07D7900FAE9FC /* ManagerSelectionViewController.swift */; };
 		B2FF9C8F21B082BF00FAE9FC /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C8E21B082BF00FAE9FC /* UserCollectionViewCell.swift */; };
+		B2FF9C9121B09A4C00FAE9FC /* MyPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FF9C9021B09A4C00FAE9FC /* MyPeripheral.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B24769F921B201C200293CB1 /* CentralManagerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManagerViewController.swift; sourceTree = "<group>"; };
+		B24769FA21B201C200293CB1 /* PeripheralManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralManager2.swift; sourceTree = "<group>"; };
+		B24769FD21B20D6900293CB1 /* ExampleFile.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ExampleFile.jpeg; sourceTree = "<group>"; };
 		B2FF9C6E21B07CC500FAE9FC /* AirShare 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AirShare 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2FF9C7121B07CC500FAE9FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B2FF9C7321B07CC500FAE9FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,8 +36,8 @@
 		B2FF9C8321B07D0100FAE9FC /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		B2FF9C8521B07D7900FAE9FC /* CentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManager.swift; sourceTree = "<group>"; };
 		B2FF9C8621B07D7900FAE9FC /* PeripheralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralManager.swift; sourceTree = "<group>"; };
-		B2FF9C8721B07D7900FAE9FC /* ManagerSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagerSelectionViewController.swift; sourceTree = "<group>"; };
 		B2FF9C8E21B082BF00FAE9FC /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
+		B2FF9C9021B09A4C00FAE9FC /* MyPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPeripheral.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +74,7 @@
 				B2FF9C7321B07CC500FAE9FC /* ViewController.swift */,
 				B2FF9C7521B07CC500FAE9FC /* Main.storyboard */,
 				B2FF9C7821B07CC600FAE9FC /* Assets.xcassets */,
+				B24769FD21B20D6900293CB1 /* ExampleFile.jpeg */,
 				B2FF9C7A21B07CC600FAE9FC /* LaunchScreen.storyboard */,
 				B2FF9C7D21B07CC600FAE9FC /* Info.plist */,
 				B2FF9C8E21B082BF00FAE9FC /* UserCollectionViewCell.swift */,
@@ -80,9 +87,11 @@
 			isa = PBXGroup;
 			children = (
 				B2FF9C8321B07D0100FAE9FC /* Device.swift */,
-				B2FF9C8721B07D7900FAE9FC /* ManagerSelectionViewController.swift */,
 				B2FF9C8521B07D7900FAE9FC /* CentralManager.swift */,
 				B2FF9C8621B07D7900FAE9FC /* PeripheralManager.swift */,
+				B24769F921B201C200293CB1 /* CentralManagerViewController.swift */,
+				B24769FA21B201C200293CB1 /* PeripheralManager2.swift */,
+				B2FF9C9021B09A4C00FAE9FC /* MyPeripheral.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -145,6 +154,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24769FE21B20D6900293CB1 /* ExampleFile.jpeg in Resources */,
 				B2FF9C7C21B07CC600FAE9FC /* LaunchScreen.storyboard in Resources */,
 				B2FF9C7921B07CC600FAE9FC /* Assets.xcassets in Resources */,
 				B2FF9C7721B07CC500FAE9FC /* Main.storyboard in Resources */,
@@ -158,12 +168,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24769FC21B201C200293CB1 /* PeripheralManager2.swift in Sources */,
+				B24769FB21B201C200293CB1 /* CentralManagerViewController.swift in Sources */,
 				B2FF9C8821B07D7900FAE9FC /* CentralManager.swift in Sources */,
-				B2FF9C8A21B07D7900FAE9FC /* ManagerSelectionViewController.swift in Sources */,
 				B2FF9C8421B07D0100FAE9FC /* Device.swift in Sources */,
 				B2FF9C7421B07CC500FAE9FC /* ViewController.swift in Sources */,
 				B2FF9C8921B07D7900FAE9FC /* PeripheralManager.swift in Sources */,
 				B2FF9C8F21B082BF00FAE9FC /* UserCollectionViewCell.swift in Sources */,
+				B2FF9C9121B09A4C00FAE9FC /* MyPeripheral.swift in Sources */,
 				B2FF9C7221B07CC500FAE9FC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
