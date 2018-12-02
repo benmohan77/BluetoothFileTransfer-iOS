@@ -139,9 +139,12 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         print("Discovered \(peripheral.name) at \(RSSI)")
         
-        //Add peripherals to list
+        //Add peripherals to my list
         peripherals?.insert(peripheral)
-        myPeripherals?.insert(MyPeripheral(peripheral: peripheral))
+        let newMyPeripheral = MyPeripheral(peripheral: peripheral)
+        let name = advertisementData["name"] as? String
+        newMyPeripheral.name = name
+        myPeripherals?.insert(newMyPeripheral)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
         
         // check to see if we've already saved a reference to this peripheral
@@ -231,57 +234,11 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     
                     if let tempMyPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, set: myPeripherals!){
                         tempMyPeripheral.nameCharacteristic = characteristic
-                        
-//                        peripheral.readValue(for: characteristic)
                     }
                 }
             }
         }
     }
-    
-//    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-//        print("didUpdateValueForCharacteristic: \(Date())")
-//        // if there was an error then print it and bail out
-//        if error != nil {
-//            print("Error updating value for characteristic: \(characteristic) - \(error?.localizedDescription)")
-//            return
-//        }
-//
-//        // make sure we have a characteristic value
-//        guard let value = characteristic.value else {
-//            print("Characteristic Value is nil on this go-round")
-//            return
-//        }
-//
-//        print("Bytes transferred: \(value.count)")
-//
-////        var test = String.init(data: value, encoding: String.Encoding.utf8)
-////        print(test)
-//
-//        // make sure we have a characteristic value
-//        guard let nextChunk = String(data: value, encoding: String.Encoding.utf8) else {
-//            print("Next chunk of data is nil.")
-//            return
-//        }
-//
-//        print("Next chunk: \(nextChunk)")
-//
-//        // If we get the EOM tag, we fill the text view
-//        if (nextChunk == Device.EOM) {
-//            if let message = String(data: dataBuffer as Data, encoding: String.Encoding.utf8) {
-//                print("Final message: \(message)")
-//
-//                // truncate our buffer now that we received the EOM signal!
-//                dataBuffer.length = 0
-//            }
-//        } else {
-//            dataBuffer.append(value)
-//            print("Next chunk received: \(nextChunk)")
-//            if let buffer = self.dataBuffer {
-//                print("Transfer buffer: \(String(data: buffer as Data, encoding: String.Encoding.utf8))")
-//            }
-//        }
-//    }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
 //        print("didUpdateValueForCharacteristic: \(Date())")
@@ -298,8 +255,6 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             return
         }
         
-//        print("Bytes transferred: \(value.count)")
-        
         // make sure we have a characteristic value
         if let checkEOM = String(data: value, encoding: String.Encoding.utf8){
             if checkEOM == Device.EOM{
@@ -312,26 +267,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             }
         }else{
             dataBuffer.append(value)
-////            print("Next chunk received: \(value)")
-//            if let buffer = self.dataBuffer {
-//                print("Transfer buffer: \(String(data: buffer as Data, encoding: String.Encoding.utf8))")
-//            }
         }
-        
-//        // If we get the EOM tag, we fill the text view
-//        if (nextChunk == Device.EOM) {
-//
-//            myData = dataBuffer as Data
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatedData"), object: nil)
-//            dataBuffer.length = 0
-//
-//        } else {
-//            dataBuffer.append(value)
-//            print("Next chunk received: \(nextChunk)")
-//            if let buffer = self.dataBuffer {
-//                print("Transfer buffer: \(String(data: buffer as Data, encoding: String.Encoding.utf8))")
-//            }
-//        }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {

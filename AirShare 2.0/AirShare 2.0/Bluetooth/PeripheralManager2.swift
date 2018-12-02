@@ -175,7 +175,7 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         if peripheral.state != .poweredOn {
             return
         }
-        peripheralManager?.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
+        peripheralManager?.startAdvertising(["name" : "Aaron", CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
         
         print("Bluetooth is Powered Up!!!")
         
