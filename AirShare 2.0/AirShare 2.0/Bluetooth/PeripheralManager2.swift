@@ -15,6 +15,7 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     
     var peripheralManager:CBPeripheralManager?
     var transferCharacteristic:CBMutableCharacteristic?
+    var nameCharacteristic : CBMutableCharacteristic?
     var dataToSend:Data?
     var sendDataIndex = 0
     let notifyMTU = 20
@@ -175,18 +176,20 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         if peripheral.state != .poweredOn {
             return
         }
-        peripheralManager?.startAdvertising(["name" : "Aaron", CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
+        peripheralManager?.startAdvertising([CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
         
         print("Bluetooth is Powered Up!!!")
         
         // Build Peripheral Service: first, create service characteristic
         self.transferCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.TransferCharacteristic), properties: .notify, value: nil, permissions: .readable)
         
+        self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: "Aaron".data(using: .utf8)!, permissions: .readable)
+        
         // create the service
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
         
         // add characteristic to the service
-        service.characteristics = [self.transferCharacteristic!]
+        service.characteristics = [self.transferCharacteristic!, self.nameCharacteristic!]
         
         // add service to the peripheral manager
         self.peripheralManager?.add(service)
