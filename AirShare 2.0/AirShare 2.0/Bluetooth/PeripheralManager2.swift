@@ -25,8 +25,7 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     var sendingTextData = false
     var count = 0
     
-    override init() {
-        super.init()
+    func start(){
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
     }
     
@@ -169,9 +168,7 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     }
 
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        
         print("Peripheral Manager State Updated: \(peripheral.state)")
-
         // bail out if peripheral is not powered on
         if peripheral.state != .poweredOn {
             return
@@ -184,6 +181,7 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         self.transferCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.TransferCharacteristic), properties: .notify, value: nil, permissions: .readable)
         
         self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: "Aaron".data(using: .utf8)!, permissions: .readable)
+
         
         // create the service
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
@@ -193,6 +191,8 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         
         // add service to the peripheral manager
         self.peripheralManager?.add(service)
+        print(service.characteristics!.count)
+        print()
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
