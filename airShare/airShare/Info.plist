@@ -6,6 +6,8 @@
 	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>airShare needs access to Photos in order to be able to share them</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

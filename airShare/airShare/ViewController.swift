@@ -73,11 +73,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 //        }, completion: nil)
     }
     
+    var centralManager : BTCentralManagerService?
+    var peripheralManager : BTPeripheralManagerService?
+    
     override func viewDidLoad() {
         //Bluetooth Stuff
-        BTPeripheralManagerService.instance
 //        BTCentralManagerService.instance
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updatePeripherals), name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updatePeripheralNames), name: NSNotification.Name(rawValue: "updatePeripheralNames"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updatedData), name: NSNotification.Name(rawValue: "updatedData"), object: nil)
+        
+        //Bluetooth
+        centralManager = BTCentralManagerService.init()
+        peripheralManager = BTPeripheralManagerService.init()
         
         self.CollectionWrapper.alpha = 0
         let layout = UICollectionViewFlowLayout()
@@ -88,6 +100,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         list.setUpdateFunction {
             self.updateCollectView()
         }
+        
         let actionSheet = UIAlertController(title: Constants.actionTitle, message: Constants.actionMessage, preferredStyle: .actionSheet)
         //actionSheet.addAction(UIAlertAction(title: Constants.camera, style: .default, handler: { (action) -> Void in self.handleAction(.camera) }))
         actionSheet.addAction(UIAlertAction(title: Constants.photos, style: .default, handler: { (action) -> Void in self.handleAction(.photo)}))
@@ -260,6 +273,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
             print("\(title):: Time: \(timeElapsed)")
         }
+    }
+    
+    @ objc func updatePeripherals(notif: NSNotification) {
+        self.collectionView.reloadData()
+    }
+    
+    @ objc func updatePeripheralNames(notif: NSNotification){
+        self.collectionView.reloadData()
+    }
+    
+    @ objc func updatedData(notif: NSNotification){
+        //var message = String(data: centralManager!.myData!, encoding: .utf8)
+        var data = centralManager!.myData!
+        var image = UIImage.init(data: data)
+        //imageView.image = image
     }
 }
 

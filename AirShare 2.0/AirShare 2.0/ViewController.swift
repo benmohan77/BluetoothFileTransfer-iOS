@@ -62,9 +62,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @ objc func updatedData(notif: NSNotification){
         //var message = String(data: centralManager!.myData!, encoding: .utf8)
         var data = centralManager!.myData!
-        
         var image = UIImage.init(data: data)
-        
         imageView.image = image
 //        textView!.text = message
     }

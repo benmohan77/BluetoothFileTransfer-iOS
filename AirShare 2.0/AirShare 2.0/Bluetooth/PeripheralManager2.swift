@@ -47,7 +47,7 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
 //            dataToSend = currentTextSnapshot.data(using: String.Encoding.utf8)
 //            dataToSend = UIImage(named: "ExampleFile")!.pngData()
 //            dataToSend = UIImage(named: "Image")!.pngData()
-            dataToSend = UIImage(named: "Image2")!.pngData()
+            dataToSend = UIImage(named: "ExampleFile")!.pngData()
             
             sendDataIndex = 0
             sendTextData()
