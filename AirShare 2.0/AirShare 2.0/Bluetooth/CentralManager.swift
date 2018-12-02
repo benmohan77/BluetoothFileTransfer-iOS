@@ -151,6 +151,8 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         if self.peripheral != peripheral {
             self.peripheral = peripheral
             
+//            let transferSeviceUUID = CBUUID(string: Device.TransferService)
+//           peripheral.discoverServices([transferSeviceUUID])
             // connect to the peripheral
             print("Connecting to peripheral: \(peripheral)")
             centralManager?.connect(peripheral, options: nil)
@@ -209,7 +211,8 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 // If we found either the transfer service, discover the transfer characteristic
                 if (service.uuid == CBUUID(string: Device.TransferService)) {
                     let transferCharacteristicUUID = CBUUID.init(string: Device.TransferCharacteristic)
-                    peripheral.discoverCharacteristics([transferCharacteristicUUID], for: service)
+                    let nameCharacteristicUUID = CBUUID.init(string: Device.NameCharacteristic)
+                    peripheral.discoverCharacteristics([transferCharacteristicUUID, nameCharacteristicUUID], for: service)
                     
                     if let tempMyPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, set: myPeripherals!){
                         tempMyPeripheral.airshareService = service
@@ -227,14 +230,11 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         
         if let characteristics = service.characteristics {
             for characteristic in characteristics {
+                print(characteristic.uuid)
                 // Transfer Characteristic
                 if characteristic.uuid == CBUUID(string: Device.TransferCharacteristic) {
                     // subscribe to dynamic changes
-                    peripheral.setNotifyValue(true, for: characteristic)
-                    
-                    if let tempMyPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, set: myPeripherals!){
-                        tempMyPeripheral.nameCharacteristic = characteristic
-                    }
+                    //peripheral.setNotifyValue(true, for: characteristic)
                 }else if characteristic.uuid == CBUUID(string: Device.NameCharacteristic){
                     if let value = characteristic.value{
                         var myPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, set: myPeripherals!)

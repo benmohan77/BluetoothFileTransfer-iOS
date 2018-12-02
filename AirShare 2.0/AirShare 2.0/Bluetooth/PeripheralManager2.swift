@@ -183,17 +183,13 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         // Build Peripheral Service: first, create service characteristic
         self.transferCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.TransferCharacteristic), properties: .notify, value: nil, permissions: .readable)
         
-//        "Aaron".data(using: .utf8)!
-        
-        self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .notify, value: nil, permissions: .readable)
+        self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: "Aaron".data(using: .utf8)!, permissions: .readable)
         
         // create the service
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
         
         // add characteristic to the service
-        service.characteristics = [self.transferCharacteristic!, self.nameCharacteristic!]
-        
-        print("Service chars count \(service.characteristics?.count)")
+        service.characteristics = [self.nameCharacteristic!, self.transferCharacteristic!]
         
         // add service to the peripheral manager
         self.peripheralManager?.add(service)
