@@ -181,12 +181,16 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         self.transferCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.TransferCharacteristic), properties: .notify, value: nil, permissions: .readable)
         
         self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: "Tyler".data(using: .utf8)!, permissions: .readable)
+
+//        "Aaron".data(using: .utf8)!
         
         // create the service
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
         
         // add characteristic to the service
         service.characteristics = [self.transferCharacteristic!, self.nameCharacteristic!]
+        
+        print("Service chars count \(service.characteristics?.count)")
         
         // add service to the peripheral manager
         self.peripheralManager?.add(service)
@@ -208,5 +212,11 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     func updateValue(){
         captureCurrentText()
         sendTextData()
+    }
+    
+    func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
+        if let err = error{
+           print(err)
+        }
     }
 }
