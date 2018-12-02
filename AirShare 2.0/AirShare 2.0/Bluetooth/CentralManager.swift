@@ -142,8 +142,8 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         //Add peripherals to my list
         peripherals?.insert(peripheral)
         let newMyPeripheral = MyPeripheral(peripheral: peripheral)
-        let name = advertisementData["name"] as? String
-        newMyPeripheral.name = name
+//        let name = advertisementData["name"] as? String
+//        newMyPeripheral.name = name
         myPeripherals?.insert(newMyPeripheral)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
         
@@ -234,6 +234,13 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     
                     if let tempMyPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, set: myPeripherals!){
                         tempMyPeripheral.nameCharacteristic = characteristic
+                    }
+                }else if characteristic.uuid == CBUUID(string: Device.NameCharacteristic){
+                    if let value = characteristic.value{
+                        var myPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, set: myPeripherals!)
+                        
+                        myPeripheral?.name = String(data: value, encoding: String.Encoding.utf8)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
                     }
                 }
             }
