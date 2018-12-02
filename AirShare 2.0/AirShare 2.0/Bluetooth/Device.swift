@@ -15,7 +15,7 @@ struct Device {
     // Apple Characteristic: "08590F7E-DB05-467E-8757-72F6FAEB13D4"
     static let TransferService = "E71EE188-279F-4ED6-8055-12D77BFD900C"
     static let TransferCharacteristic = "2F016955-E675-49A6-9176-111E2A1CF333"
-    static let NameCharacteristic = "72AC3CB7-6E4C-4A15-90F5-E04B5382A290"
+    static let NameCharacteristic = "2F016955-E675-49A6-9176-111E2A1CF332"
     
     // Tags
     static let EOM = "{{{EOM}}}"
