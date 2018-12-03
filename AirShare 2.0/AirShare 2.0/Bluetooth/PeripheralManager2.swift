@@ -10,9 +10,7 @@ import UIKit
 import CoreBluetooth
 
 class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
-    
-    var testText = "This is a test"
-    
+
     var peripheralManager:CBPeripheralManager?
     var transferCharacteristic:CBMutableCharacteristic?
     var nameCharacteristic : CBMutableCharacteristic?
@@ -25,7 +23,8 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     var sendingTextData = false
     var count = 0
     
-    func start(){
+    override init() {
+        super.init()
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
     }
     
@@ -39,11 +38,10 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     func captureCurrentText() {
         print("captureCurrentText")
         
-        // if we are not sending right now, capture the current state
         if !sendingTextData {
 //            print("Not currently sending data. Capturing snapshot and will send it over!")
             count += 1
-            currentTextSnapshot = testText + " \(count)"
+//            currentTextSnapshot = testText + " \(count)"
 //            dataToSend = currentTextSnapshot.data(using: String.Encoding.utf8)
 //            dataToSend = UIImage(named: "ExampleFile")!.pngData()
 //            dataToSend = UIImage(named: "Image")!.pngData()
@@ -57,8 +55,6 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     }
     
     func sendTextData() {
-//        print("Attempting to send data...")
-        
         guard let peripheralManager = self.peripheralManager else {
             print("No peripheral manager!!!")
             return
@@ -79,8 +75,6 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
                 print("EOM Sent!!!")
                 sendingTextData = false
             }
-            
-            // Return and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendTextData again
             return
         }
         
@@ -103,8 +97,6 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
             sendingTextData = true
             
             // ---- Prepare the next message chunk
-//            print("Preparing next message chunk...")
-            
             // Determine chunk size
             var amountToSend = dataToSend.count - sendDataIndex
             print("Next amout to send: \(amountToSend)")
@@ -116,29 +108,18 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
             
             // extract the data we want to send
             let upToIndex = sendDataIndex + amountToSend
-//            print("Next Chunk should be \(amountToSend) bytes long and goes from \(sendDataIndex) to \(upToIndex)")
-
             // verify chunk length
             let chunk = dataToSend.subdata(in: sendDataIndex ..< upToIndex)
-//            print("Next Chunk is \(chunk.count) bytes long.")
-            
-            // output the chunk to see if we got the right block of text...
-//            let chunkText = String(data: chunk, encoding: String.Encoding.utf8)
-//            print("Next Chunk from data: \(chunkText)")
-            
-            // Send the chunk of text...
+
             // updateValue sends an updated characteristic value to one or more subscribed centrals via a notification.
             // passing nil for the centrals notifies all subscribed centrals, but you can target specific ones if you need to.
             didSend = peripheralManager.updateValue(chunk, for: transferCharacteristic, onSubscribedCentrals: nil)
             
             // If it didn't work, drop out and wait for the callback
             if !didSend {
+                print("Update Failed")
                 return
             }
-            
-//            if let stringFromData = String.init(data: chunk, encoding: String.Encoding.utf8) {
-//                print("Sent: \(stringFromData)")
-//            }
             
             // It did send, so update our index
             self.sendDataIndex += amountToSend;
@@ -163,7 +144,6 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
                 
                 return;
             }
-            
         }
     }
 
@@ -177,12 +157,11 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         
         print("Bluetooth is Powered Up!!!")
         
-        // Build Peripheral Service: first, create service characteristic
+        // create service characteristics
         self.transferCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.TransferCharacteristic), properties: .notify, value: nil, permissions: .readable)
         
-        self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: "Aaron".data(using: .utf8)!, permissions: .readable)
+        self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: "Tyler".data(using: .utf8)!, permissions: .readable)
 
-        
         // create the service
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
         
@@ -191,13 +170,10 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         
         // add service to the peripheral manager
         self.peripheralManager?.add(service)
-        print(service.characteristics!.count)
-        print()
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        print("Central has subscribed to characteristic: \(central)")
-        captureCurrentText()
+        print("Central has subscribed to characteristic: \(characteristic.uuid)")
     }
 
     func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
@@ -208,12 +184,6 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     
     func updateValue(){
         captureCurrentText()
-        sendTextData()
-    }
-    
-    func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
-        if let err = error{
-           print(err)
-        }
+//        sendTextData()
     }
 }

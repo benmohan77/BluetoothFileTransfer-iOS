@@ -33,11 +33,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return centralManager!.peripherals!.count
+        return centralManager!.myPeripherals!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UserCell", for: indexPath) as! UserCollectionViewCell
         
         let myPeripheral = Array(centralManager!.myPeripherals!)[indexPath.row] as! MyPeripheral
@@ -49,6 +48,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let myPeripheral = Array(centralManager!.myPeripherals!)[indexPath.row] as? MyPeripheral{
+            print("Connecting to \(myPeripheral.name)")
+            
+            centralManager?.centralManager.connect(myPeripheral.peripheral!, options: nil)
+//            myPeripheral.peripheral!.setNotifyValue(true, for: myPeripheral.transferCharacteristic!)
+           
+        }else{
+            print("Couldnt find peripheral")
+        }
     }
     
     @ objc func updatePeripherals(notif: NSNotification) {

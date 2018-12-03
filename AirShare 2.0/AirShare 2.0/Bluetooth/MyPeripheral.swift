@@ -13,7 +13,8 @@ class MyPeripheral: NSObject {
     
     var peripheral : CBPeripheral?
     var nameCharacteristic : CBCharacteristic?
-    var airshareService : CBService?
+    var transferCharacteristic : CBCharacteristic?
+    var transferService : CBService?
     var name : String?
 
     init(peripheral : CBPeripheral) {
