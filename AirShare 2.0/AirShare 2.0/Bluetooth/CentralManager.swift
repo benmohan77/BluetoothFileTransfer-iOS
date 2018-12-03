@@ -165,6 +165,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         // Clear any cached data...
         dataBuffer.length = 0
         
+        self.peripheral = peripheral
         // IMPORTANT: Set the delegate property, otherwise we won't receive the discovery callbacks, like peripheral(_:didDiscoverServices)
         peripheral.delegate = self
         
@@ -266,6 +267,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     myData = dataBuffer as Data
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatedData"), object: nil)
                     dataBuffer.length = 0
+                    self.disconnect()
                 }else{
                     dataBuffer.append(value)
                 }

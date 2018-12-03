@@ -23,6 +23,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updatedData), name: NSNotification.Name(rawValue: "updatedData"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.requestedFiles), name: NSNotification.Name(rawValue: "requestedFiles"), object: nil)
+        
         // Do any additional setup after loading the view, typically from a nib.
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -76,6 +78,29 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         var image = UIImage.init(data: data)
         imageView.image = image
 //        textView!.text = message
+    }
+    
+    @ objc func requestedFiles(notif: NSNotification){
+        let alert = UIAlertController(title: "Send File?", message: nil, preferredStyle: .alert)
+        
+        let sendAction = UIAlertAction(title: "Send", style: .default) {
+            [unowned self] action in
+            
+            //Kick off sending data
+            self.peripheralManager?.updateValue()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
+            [unowned self] action in
+            
+            //Kick off sending data
+            self.peripheralManager?.sendEOM()
+        }
+        
+        alert.addAction(sendAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
     }
 }
 

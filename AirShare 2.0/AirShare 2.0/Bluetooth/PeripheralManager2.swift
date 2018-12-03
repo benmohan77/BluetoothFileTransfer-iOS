@@ -12,7 +12,7 @@ import CoreBluetooth
 class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
 
     var peripheralManager:CBPeripheralManager?
-    var transferCharacteristic:CBMutableCharacteristic?
+    var transferCharacteristic : CBMutableCharacteristic?
     var nameCharacteristic : CBMutableCharacteristic?
     var dataToSend:Data?
     var sendDataIndex = 0
@@ -176,6 +176,8 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
         print("Central has subscribed to characteristic: \(characteristic.uuid)")
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "requestedFiles"), object: nil)
     }
 
     func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
@@ -187,5 +189,16 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     func updateValue(){
         captureCurrentText()
 //        sendTextData()
+        
+        
+    }
+    
+    func sendEOM(){
+        let didSend = self.peripheralManager?.updateValue(Device.EOM.data(using: String.Encoding.utf8)!, for: self.transferCharacteristic!, onSubscribedCentrals: nil)
+        if didSend! {
+            sendingEOM = false
+            print("EOM Sent!!!")
+            sendingTextData = false
+        }
     }
 }
