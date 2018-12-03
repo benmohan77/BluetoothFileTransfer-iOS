@@ -258,21 +258,22 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             
             myPeripheral?.name = String(data: value, encoding: String.Encoding.utf8)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
-        }
-        
-        // make sure we have a characteristic value
-        if let checkEOM = String(data: value, encoding: String.Encoding.utf8){
-            if checkEOM == Device.EOM{
-                print("Finished")
-                myData = dataBuffer as Data
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatedData"), object: nil)
-                dataBuffer.length = 0
+        }else if characteristic.uuid == CBUUID(string: Device.TransferCharacteristic){        
+            // make sure we have a characteristic value
+            if let checkEOM = String(data: value, encoding: String.Encoding.utf8){
+                if checkEOM == Device.EOM{
+                    print("Finished")
+                    myData = dataBuffer as Data
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatedData"), object: nil)
+                    dataBuffer.length = 0
+                }else{
+                    dataBuffer.append(value)
+                }
             }else{
                 dataBuffer.append(value)
             }
-        }else{
-            dataBuffer.append(value)
         }
+        
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?) {

@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirShare 2.0/Bluetooth/CentralManager.swift"
-            timestampString = "565487534.953687"
+            timestampString = "565571796.35583"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "60"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirShare 2.0/Bluetooth/CentralManager.swift"
-            timestampString = "565487534.9538209"
+            timestampString = "565571796.356142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirShare 2.0/Bluetooth/CentralManager.swift"
-            timestampString = "565487534.953939"
+            timestampString = "565571796.356335"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirShare 2.0/Bluetooth/PeripheralManager2.swift"
-            timestampString = "565487534.954036"
+            timestampString = "565571796.3565331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "peripheralManagerIsReady(toUpdateSubscribers:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,12 +90,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirShare 2.0/Bluetooth/PeripheralManager2.swift"
-            timestampString = "565487534.954643"
+            timestampString = "565571796.356776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "sendTextData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirShare 2.0/ViewController.swift"
+            timestampString = "565571572.9871711"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "updatedData(notif:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

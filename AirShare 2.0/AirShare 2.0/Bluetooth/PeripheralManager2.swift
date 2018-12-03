@@ -47,6 +47,8 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
 //            dataToSend = UIImage(named: "Image")!.pngData()
             dataToSend = UIImage(named: "ExampleFile")!.pngData()
             
+            print("Total Data to send \(dataToSend?.count)")
+            
             sendDataIndex = 0
             sendTextData()
         } else {
