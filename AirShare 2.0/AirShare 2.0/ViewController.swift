@@ -1,5 +1,6 @@
 import UIKit
 import CoreBluetooth
+import UserNotifications
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet var textView: UITextView!
@@ -16,6 +17,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let center = UNUserNotificationCenter.current()
+        let options: UNAuthorizationOptions = [.alert, .sound];
+        center.requestAuthorization(options: options) {
+            (granted, error) in
+            if !granted {
+                print("Something went wrong")
+            }
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.updatePeripherals), name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
         
@@ -101,6 +110,27 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         alert.addAction(cancelAction)
         
         present(alert, animated: true)
+        
+        //Send local notification
+        let identifier = "UYLLocalNotification"
+        let content = UNMutableNotificationContent()
+        content.title = "File Request"
+        content.body = "Aaron is requesting a file"
+        content.sound = UNNotificationSound.default
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1,
+                                                        repeats: false)
+
+        let request = UNNotificationRequest(identifier: identifier,
+                                            content: content, trigger: trigger)
+        
+        
+        let center = UNUserNotificationCenter.current()
+        center.add(request, withCompletionHandler: { (error) in
+            if let error = error {
+                // Something went wrong
+                print(error)
+            }
+        })
     }
 }
 
