@@ -168,7 +168,7 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         
         self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: "Tyler".data(using: .utf8)!, permissions: .readable)
         
-        self.centralNameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.CentralNameCharacteristic), properties: .read, value: nil, permissions: .writeable)
+        self.centralNameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.CentralNameCharacteristic), properties: .writeWithoutResponse, value: nil, permissions: .writeable)
 
         // create the service
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
@@ -182,8 +182,6 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
         print("Central has subscribed to characteristic: \(characteristic.uuid)")
-        
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "requestedFiles"), object: nil)
     }
 
     func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
@@ -196,9 +194,9 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         
         for request in requests{
             if(request.characteristic.uuid == CBUUID(string: Device.CentralNameCharacteristic)){
-                if let data = self.centralNameCharacteristic?.value{
+                if let data = request.value{
                     self.centralName = String(data: data, encoding: .utf8)
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatedCentralName"), object: nil)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "requestedFiles"), object: nil)
                 }
             }
         }
