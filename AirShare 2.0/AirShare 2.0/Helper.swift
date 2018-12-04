@@ -55,7 +55,8 @@ class Helper {
     
     static func getNameFor(id: String) -> String?{
         let standard = UserDefaults.standard
-        return standard.string(forKey:"id_" + id)
+        var test = standard.string(forKey:"id_" + id)
+        return test
     }
     
     static func set(name: String, id: String){

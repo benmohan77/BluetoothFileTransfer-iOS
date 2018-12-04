@@ -142,6 +142,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             var name = "Error"
             if let adName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
                 name = adName
+                Helper.set(name: adName, id: peripheral.identifier.uuidString)
             }else{
                 name = Helper.getNameFor(id: peripheral.identifier.uuidString) ?? "Someone"
             }
