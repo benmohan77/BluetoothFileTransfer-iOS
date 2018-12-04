@@ -17,6 +17,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
         let center = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = [.alert, .sound];
         center.requestAuthorization(options: options) {
@@ -41,6 +44,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         //Bluetooth
         centralManager = CentralManager.init()
         peripheralManager = PeripheralManager2.init()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        if(Helper.getName() == nil){
+            Helper.askForName(vc: self)
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

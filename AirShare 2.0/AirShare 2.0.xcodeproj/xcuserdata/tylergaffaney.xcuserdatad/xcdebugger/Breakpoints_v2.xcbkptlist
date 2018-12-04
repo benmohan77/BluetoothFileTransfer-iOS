@@ -2,4 +2,134 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirShare 2.0/ViewController.swift"
+            timestampString = "565578214.361397"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirShare 2.0/Helper.swift"
+            timestampString = "565578214.361747"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "askForName(vc:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirShare 2.0/Helper.swift"
+            timestampString = "565578214.361797"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "askForName(vc:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AirShare_2_0.Helper.askForName(vc: __C.UIViewController) -&gt; ()"
+                  moduleName = "AirShare 2.0"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tylergaffaney/Documents/Github/BluetoothFileTransfer-iOS/AirShare%202.0/AirShare%202.0/Helper.swift"
+                  timestampString = "565578214.5861191"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "296">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UITextField) -&gt; () in static AirShare_2_0.Helper.askForName(vc: __C.UIViewController) -&gt; ()"
+                  moduleName = "AirShare 2.0"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tylergaffaney/Documents/Github/BluetoothFileTransfer-iOS/AirShare%202.0/AirShare%202.0/Helper.swift"
+                  timestampString = "565578214.587889"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirShare 2.0/Helper.swift"
+            timestampString = "565578214.361847"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "askForName(vc:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static AirShare_2_0.Helper.askForName(vc: __C.UIViewController) -&gt; ()"
+                  moduleName = "AirShare 2.0"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tylergaffaney/Documents/Github/BluetoothFileTransfer-iOS/AirShare%202.0/AirShare%202.0/Helper.swift"
+                  timestampString = "565578214.592068"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "436">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (__C.UIAlertAction) -&gt; () in static AirShare_2_0.Helper.askForName(vc: __C.UIViewController) -&gt; ()"
+                  moduleName = "AirShare 2.0"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tylergaffaney/Documents/Github/BluetoothFileTransfer-iOS/AirShare%202.0/AirShare%202.0/Helper.swift"
+                  timestampString = "565578214.593438"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

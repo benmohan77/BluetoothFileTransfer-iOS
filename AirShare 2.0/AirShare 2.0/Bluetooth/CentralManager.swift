@@ -264,10 +264,10 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         
         //update name
         if characteristic.uuid == CBUUID(string: Device.NameCharacteristic){
-            let myPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, set: myPeripherals!)
-            
-            myPeripheral?.name = String(data: value, encoding: String.Encoding.utf8)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
+//            let myPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, set: myPeripherals!)
+//
+//            myPeripheral?.name = String(data: value, encoding: String.Encoding.utf8)
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
         }else if characteristic.uuid == CBUUID(string: Device.TransferCharacteristic){
             // make sure we have a characteristic value
             if let checkEOM = String(data: value, encoding: String.Encoding.utf8){
