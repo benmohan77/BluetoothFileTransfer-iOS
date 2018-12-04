@@ -13,7 +13,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
 
     // MARK: Handling User Interactions
     override init() {
-        super.init()
+        super.init() 
         
         dataBuffer = NSMutableData()
         myPeripherals = Set()
@@ -136,16 +136,22 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         if !peripherals!.contains(peripheral){
             print("Discovered \(peripheral.name) at \(RSSI)")
             peripherals?.insert(peripheral)
-            
+            print(peripheral.identifier)
             let tempMyPeripheral = MyPeripheral(peripheral: peripheral)
-            tempMyPeripheral.name = advertisementData[CBAdvertisementDataLocalNameKey] as! String
             
+            var name = "Error"
+            if let adName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
+                name = adName
+            }else{
+                name = Helper.getNameFor(id: peripheral.identifier.uuidString) ?? "Someone"
+            }
+            tempMyPeripheral.name = name
             myPeripherals?.insert(tempMyPeripheral)
             
 //            let transferSeviceUUID = CBUUID(string: Device.TransferService)
 //            peripheral.discoverServices([transferSeviceUUID])
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
             
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
         }
         
 //        // check to see if we've already saved a reference to this peripheral

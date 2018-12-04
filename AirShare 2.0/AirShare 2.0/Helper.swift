@@ -52,4 +52,14 @@ class Helper {
         let standard = UserDefaults.standard
         return standard.string(forKey: "my_device_name")
     }
+    
+    static func getNameFor(id: String) -> String?{
+        let standard = UserDefaults.standard
+        return standard.string(forKey:"id_" + id)
+    }
+    
+    static func set(name: String, id: String){
+        let standard = UserDefaults.standard
+        standard.set(name, forKey: "id_" + id)
+    }
 }
