@@ -90,7 +90,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     @ objc func requestedFiles(notif: NSNotification){
-        let alert = UIAlertController(title: "Send File?", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Send File?", message: "\(peripheralManager?.centralName ?? "Someone") is requesting a file", preferredStyle: .alert)
         
         let sendAction = UIAlertAction(title: "Send", style: .default) {
             [unowned self] action in
@@ -115,7 +115,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let identifier = "UYLLocalNotification"
         let content = UNMutableNotificationContent()
         content.title = "File Request"
-        content.body = "Aaron is requesting a file"
+        content.body = "\(peripheralManager?.centralName ?? "Someone") is requesting a file"
         content.sound = UNNotificationSound.default
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1,
                                                         repeats: false)

@@ -14,6 +14,10 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
     var peripheralManager:CBPeripheralManager?
     var transferCharacteristic : CBMutableCharacteristic?
     var nameCharacteristic : CBMutableCharacteristic?
+    var centralNameCharacteristic : CBMutableCharacteristic?
+    
+    var centralName : String?
+    
     var dataToSend:Data?
     var sendDataIndex = 0
     let notifyMTU = 20
@@ -163,12 +167,14 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         self.transferCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.TransferCharacteristic), properties: .notify, value: nil, permissions: .readable)
         
         self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: "Tyler".data(using: .utf8)!, permissions: .readable)
+        
+        self.centralNameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.CentralNameCharacteristic), properties: .read, value: nil, permissions: .writeable)
 
         // create the service
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
         
         // add characteristic to the service
-        service.characteristics = [self.nameCharacteristic!, self.transferCharacteristic!]
+        service.characteristics = [self.nameCharacteristic!, self.transferCharacteristic!, self.centralNameCharacteristic!]
         
         // add service to the peripheral manager
         self.peripheralManager?.add(service)
@@ -186,11 +192,21 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         sendTextData()
     }
     
+    func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
+        
+        for request in requests{
+            if(request.characteristic.uuid == CBUUID(string: Device.CentralNameCharacteristic)){
+                if let data = self.centralNameCharacteristic?.value{
+                    self.centralName = String(data: data, encoding: .utf8)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatedCentralName"), object: nil)
+                }
+            }
+        }
+    }
+    
     func updateValue(){
         captureCurrentText()
 //        sendTextData()
-        
-        
     }
     
     func sendEOM(){

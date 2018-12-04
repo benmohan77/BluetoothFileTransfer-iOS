@@ -209,8 +209,9 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 if (service.uuid == CBUUID(string: Device.TransferService)) {
                     let transferCharacteristicUUID = CBUUID.init(string: Device.TransferCharacteristic)
                     let nameCharacteristicUUID = CBUUID.init(string: Device.NameCharacteristic)
+                    let centralNameCharacteristicUUID = CBUUID.init(string: Device.CentralNameCharacteristic)
                     
-                    peripheral.discoverCharacteristics([transferCharacteristicUUID, nameCharacteristicUUID], for: service)
+                    peripheral.discoverCharacteristics([transferCharacteristicUUID, nameCharacteristicUUID,centralNameCharacteristicUUID], for: service)
                 }
             }
         }
@@ -239,6 +240,9 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     myPeripheral?.nameCharacteristic = characteristic
                     //Get name from peripheral
                     peripheral.readValue(for: characteristic)
+                }else if characteristic.uuid == CBUUID(string: Device.CentralNameCharacteristic){
+                    print("found central name characteristic")
+                    self.peripheral?.writeValue("Aaron".data(using: .utf8)!, for: characteristic, type: CBCharacteristicWriteType.withoutResponse)
                 }
             }
         }
@@ -264,7 +268,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             
             myPeripheral?.name = String(data: value, encoding: String.Encoding.utf8)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
-        }else if characteristic.uuid == CBUUID(string: Device.TransferCharacteristic){        
+        }else if characteristic.uuid == CBUUID(string: Device.TransferCharacteristic){
             // make sure we have a characteristic value
             if let checkEOM = String(data: value, encoding: String.Encoding.utf8){
                 if checkEOM == Device.EOM{
