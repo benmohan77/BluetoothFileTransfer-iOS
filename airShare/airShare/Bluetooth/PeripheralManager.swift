@@ -1,12 +1,23 @@
+//
+//  PeripheralManagerViewController.swift
+//  BLEConnect
+//
+//  Created by Evan Stone on 8/12/16.
+//  Copyright © 2016 Cloud City. All rights reserved.
+//
+
 import UIKit
 import CoreBluetooth
 
-class BTPeripheralManagerService: NSObject, CBPeripheralManagerDelegate {
-    
-    var testText = "This is a test"
+class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     
     var peripheralManager:CBPeripheralManager?
-    var transferCharacteristic:CBMutableCharacteristic?
+    var transferCharacteristic : CBMutableCharacteristic?
+    var nameCharacteristic : CBMutableCharacteristic?
+    var centralNameCharacteristic : CBMutableCharacteristic?
+    
+    var centralName : String?
+    
     var dataToSend:Data?
     var sendDataIndex = 0
     let notifyMTU = 20
@@ -31,15 +42,16 @@ class BTPeripheralManagerService: NSObject, CBPeripheralManagerDelegate {
     func captureCurrentText() {
         print("captureCurrentText")
         
-        // if we are not sending right now, capture the current state
         if !sendingTextData {
             //            print("Not currently sending data. Capturing snapshot and will send it over!")
             count += 1
-            currentTextSnapshot = testText + " \(count)"
+            //            currentTextSnapshot = testText + " \(count)"
             //            dataToSend = currentTextSnapshot.data(using: String.Encoding.utf8)
             //            dataToSend = UIImage(named: "ExampleFile")!.pngData()
             //            dataToSend = UIImage(named: "Image")!.pngData()
             dataToSend = UIImage(named: "ExampleFile")!.pngData()
+            
+            print("Total Data to send \(dataToSend?.count)")
             
             sendDataIndex = 0
             sendTextData()
@@ -49,8 +61,6 @@ class BTPeripheralManagerService: NSObject, CBPeripheralManagerDelegate {
     }
     
     func sendTextData() {
-        //        print("Attempting to send data...")
-        
         guard let peripheralManager = self.peripheralManager else {
             print("No peripheral manager!!!")
             return
@@ -71,8 +81,6 @@ class BTPeripheralManagerService: NSObject, CBPeripheralManagerDelegate {
                 print("EOM Sent!!!")
                 sendingTextData = false
             }
-            
-            // Return and wait for peripheralManagerIsReadyToUpdateSubscribers to call sendTextData again
             return
         }
         
@@ -95,8 +103,6 @@ class BTPeripheralManagerService: NSObject, CBPeripheralManagerDelegate {
             sendingTextData = true
             
             // ---- Prepare the next message chunk
-            //            print("Preparing next message chunk...")
-            
             // Determine chunk size
             var amountToSend = dataToSend.count - sendDataIndex
             print("Next amout to send: \(amountToSend)")
@@ -108,29 +114,18 @@ class BTPeripheralManagerService: NSObject, CBPeripheralManagerDelegate {
             
             // extract the data we want to send
             let upToIndex = sendDataIndex + amountToSend
-            //            print("Next Chunk should be \(amountToSend) bytes long and goes from \(sendDataIndex) to \(upToIndex)")
-            
             // verify chunk length
             let chunk = dataToSend.subdata(in: sendDataIndex ..< upToIndex)
-            //            print("Next Chunk is \(chunk.count) bytes long.")
             
-            // output the chunk to see if we got the right block of text...
-            //            let chunkText = String(data: chunk, encoding: String.Encoding.utf8)
-            //            print("Next Chunk from data: \(chunkText)")
-            
-            // Send the chunk of text...
             // updateValue sends an updated characteristic value to one or more subscribed centrals via a notification.
             // passing nil for the centrals notifies all subscribed centrals, but you can target specific ones if you need to.
             didSend = peripheralManager.updateValue(chunk, for: transferCharacteristic, onSubscribedCentrals: nil)
             
             // If it didn't work, drop out and wait for the callback
             if !didSend {
+                print("Update Failed")
                 return
             }
-            
-            //            if let stringFromData = String.init(data: chunk, encoding: String.Encoding.utf8) {
-            //                print("Sent: \(stringFromData)")
-            //            }
             
             // It did send, so update our index
             self.sendDataIndex += amountToSend;
@@ -155,38 +150,38 @@ class BTPeripheralManagerService: NSObject, CBPeripheralManagerDelegate {
                 
                 return;
             }
-            
         }
     }
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        
         print("Peripheral Manager State Updated: \(peripheral.state)")
-        
         // bail out if peripheral is not powered on
         if peripheral.state != .poweredOn {
             return
         }
-        peripheralManager?.startAdvertising(["name" : "Aaron", CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
+        peripheralManager?.startAdvertising([CBAdvertisementDataLocalNameKey : (Helper.getName() ?? "Someone"), CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)], CBAdvertisementDataManufacturerDataKey : (Helper.getName()?.data(using: .utf8) ?? "Someone".data(using: .utf8))])
         
         print("Bluetooth is Powered Up!!!")
         
-        // Build Peripheral Service: first, create service characteristic
+        // create service characteristics
         self.transferCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.TransferCharacteristic), properties: .notify, value: nil, permissions: .readable)
+        
+        self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: (Helper.getName() ?? "Someone").data(using: .utf8)!, permissions: .readable)
+        
+        self.centralNameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.CentralNameCharacteristic), properties: .writeWithoutResponse, value: nil, permissions: .writeable)
         
         // create the service
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
         
         // add characteristic to the service
-        service.characteristics = [self.transferCharacteristic!]
+        service.characteristics = [self.nameCharacteristic!, self.transferCharacteristic!, self.centralNameCharacteristic!]
         
         // add service to the peripheral manager
         self.peripheralManager?.add(service)
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        print("Central has subscribed to characteristic: \(central)")
-        captureCurrentText()
+        print("Central has subscribed to characteristic: \(characteristic.uuid)")
     }
     
     func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
@@ -195,8 +190,29 @@ class BTPeripheralManagerService: NSObject, CBPeripheralManagerDelegate {
         sendTextData()
     }
     
+    func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
+        
+        for request in requests{
+            if(request.characteristic.uuid == CBUUID(string: Device.CentralNameCharacteristic)){
+                if let data = request.value{
+                    self.centralName = String(data: data, encoding: .utf8)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "requestedFiles"), object: nil)
+                }
+            }
+        }
+    }
+    
     func updateValue(){
         captureCurrentText()
-        sendTextData()
+        //        sendTextData()
+    }
+    
+    func sendEOM(){
+        let didSend = self.peripheralManager?.updateValue(Device.EOM.data(using: String.Encoding.utf8)!, for: self.transferCharacteristic!, onSubscribedCentrals: nil)
+        if didSend! {
+            sendingEOM = false
+            print("EOM Sent!!!")
+            sendingTextData = false
+        }
     }
 }

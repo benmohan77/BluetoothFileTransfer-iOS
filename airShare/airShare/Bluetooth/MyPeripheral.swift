@@ -1,9 +1,9 @@
 //
 //  MyPeripheral.swift
-//  airShare
+//  AirShare 2.0
 //
-//  Created by Tyler Gaffaney on 12/2/18.
-//  Copyright © 2018 Tyler Gaffaney. All rights reserved.
+//  Created by Aaron Sletten on 11/29/18.
+//  Copyright © 2018 Tyler Gaffaney Inc. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,8 @@ class MyPeripheral: NSObject {
     
     var peripheral : CBPeripheral?
     var nameCharacteristic : CBCharacteristic?
-    var airshareService : CBService?
+    var transferCharacteristic : CBCharacteristic?
+    var transferService : CBService?
     var name : String?
     
     init(peripheral : CBPeripheral) {

@@ -146,6 +146,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             }else{
                 name = Helper.getNameFor(id: peripheral.identifier.uuidString) ?? "Someone"
             }
+            
             tempMyPeripheral.name = name
             myPeripherals?.insert(tempMyPeripheral)
             

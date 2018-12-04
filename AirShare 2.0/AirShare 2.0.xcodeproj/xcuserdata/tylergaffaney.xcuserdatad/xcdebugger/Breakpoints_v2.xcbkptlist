@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirShare 2.0/ViewController.swift"
-            timestampString = "565580862.530017"
+            timestampString = "565586450.613449"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirShare 2.0/Helper.swift"
-            timestampString = "565580862.53008"
+            timestampString = "565586450.613526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirShare 2.0/Helper.swift"
-            timestampString = "565580862.5301239"
+            timestampString = "565586450.613574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
@@ -58,7 +58,7 @@
                   moduleName = "AirShare 2.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tylergaffaney/Documents/Github/BluetoothFileTransfer-iOS/AirShare%202.0/AirShare%202.0/Helper.swift"
-                  timestampString = "565580682.765824"
+                  timestampString = "565581412.164201"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -73,7 +73,7 @@
                   moduleName = "AirShare 2.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tylergaffaney/Documents/Github/BluetoothFileTransfer-iOS/AirShare%202.0/AirShare%202.0/Helper.swift"
-                  timestampString = "565580682.767516"
+                  timestampString = "565581412.1659321"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirShare 2.0/Helper.swift"
-            timestampString = "565580862.530161"
+            timestampString = "565586450.6136169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
@@ -106,7 +106,7 @@
                   moduleName = "AirShare 2.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tylergaffaney/Documents/Github/BluetoothFileTransfer-iOS/AirShare%202.0/AirShare%202.0/Helper.swift"
-                  timestampString = "565580682.771619"
+                  timestampString = "565581412.169964"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "28"
@@ -121,7 +121,7 @@
                   moduleName = "AirShare 2.0"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/tylergaffaney/Documents/Github/BluetoothFileTransfer-iOS/AirShare%202.0/AirShare%202.0/Helper.swift"
-                  timestampString = "565580682.773039"
+                  timestampString = "565581412.171334"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -129,6 +129,38 @@
                   offsetFromSymbolStart = "48">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirShare 2.0/Bluetooth/CentralManager.swift"
+            timestampString = "565586450.6136611"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "centralManager(_:didDiscover:advertisementData:rssi:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirShare 2.0/Bluetooth/CentralManager.swift"
+            timestampString = "565586450.613992"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "centralManager(_:didDiscover:advertisementData:rssi:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

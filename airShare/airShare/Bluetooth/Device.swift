@@ -1,9 +1,9 @@
 //
 //  Device.swift
-//  airShare
+//  BLEConnect
 //
-//  Created by Tyler Gaffaney on 12/2/18.
-//  Copyright © 2018 Tyler Gaffaney. All rights reserved.
+//  Created by Evan Stone on 8/15/16.
+//  Copyright © 2016 Cloud City. All rights reserved.
 //
 
 import Foundation
@@ -15,6 +15,8 @@ struct Device {
     // Apple Characteristic: "08590F7E-DB05-467E-8757-72F6FAEB13D4"
     static let TransferService = "E71EE188-279F-4ED6-8055-12D77BFD900C"
     static let TransferCharacteristic = "2F016955-E675-49A6-9176-111E2A1CF333"
+    static let NameCharacteristic = "2F016955-E675-49A6-9176-111E2A1CF332"
+    static let CentralNameCharacteristic = "2F016955-E675-49A6-9176-111E2A1CF331"
     
     // Tags
     static let EOM = "{{{EOM}}}"
