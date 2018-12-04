@@ -75,48 +75,60 @@
                                 <rect key="frame" x="0.0" y="191" width="375" height="111"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="4jg-rw-etu"/>
+                                    <constraint firstAttribute="height" constant="100" id="4jg-rw-etu"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tgv-PE-aaQ">
-                                    <size key="itemSize" width="75" height="87"/>
+                                    <size key="itemSize" width="75" height="93"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="usercell" id="k6i-HZ-j8B" customClass="UserCollectionViewCell" customModule="airShare" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="12" width="75" height="87"/>
+                                        <rect key="frame" x="0.0" y="9" width="75" height="93"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="75" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="93"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwl-nR-VuP">
-                                                    <rect key="frame" x="18.5" y="67" width="38" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwl-nR-VuP">
+                                                    <rect key="frame" x="2" y="73" width="71" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTJ-Yc-nQm">
-                                                    <rect key="frame" x="10.5" y="8" width="54" height="54"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <rect key="frame" x="10.5" y="28" width="54" height="54"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xd-bh-hCh">
+                                                            <rect key="frame" x="18.5" y="11" width="17.5" height="32.5"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="54" id="3bo-Fg-Br8"/>
+                                                        <constraint firstItem="1Xd-bh-hCh" firstAttribute="centerX" secondItem="hTJ-Yc-nQm" secondAttribute="centerX" id="X4p-Un-9qd"/>
+                                                        <constraint firstItem="1Xd-bh-hCh" firstAttribute="centerY" secondItem="hTJ-Yc-nQm" secondAttribute="centerY" id="Yct-js-hMq"/>
                                                         <constraint firstAttribute="height" constant="54" id="yZ2-y1-nBZ"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="Dwl-nR-VuP" firstAttribute="centerX" secondItem="k6i-HZ-j8B" secondAttribute="centerX" id="9px-qH-eGf"/>
-                                            <constraint firstItem="hTJ-Yc-nQm" firstAttribute="top" secondItem="k6i-HZ-j8B" secondAttribute="topMargin" constant="-20" id="Klb-dW-03u"/>
+                                            <constraint firstItem="Dwl-nR-VuP" firstAttribute="leading" secondItem="k6i-HZ-j8B" secondAttribute="leading" constant="2" id="Ik9-ZN-6Az"/>
+                                            <constraint firstItem="hTJ-Yc-nQm" firstAttribute="top" secondItem="k6i-HZ-j8B" secondAttribute="topMargin" id="Klb-dW-03u"/>
+                                            <constraint firstAttribute="trailing" secondItem="Dwl-nR-VuP" secondAttribute="trailing" constant="2" id="Wfb-1o-ovZ"/>
                                             <constraint firstAttribute="bottom" secondItem="Dwl-nR-VuP" secondAttribute="bottom" constant="2" id="ZRv-2w-Zzz"/>
                                             <constraint firstItem="hTJ-Yc-nQm" firstAttribute="centerX" secondItem="k6i-HZ-j8B" secondAttribute="centerX" id="g2C-Ds-51V"/>
                                         </constraints>
-                                        <size key="customSize" width="75" height="87"/>
+                                        <size key="customSize" width="75" height="93"/>
                                         <connections>
                                             <outlet property="label" destination="Dwl-nR-VuP" id="Qt4-Lq-CYe"/>
+                                            <outlet property="letter" destination="1Xd-bh-hCh" id="tUR-ec-eJk"/>
                                             <outlet property="subview" destination="hTJ-Yc-nQm" id="hcy-6N-Cg8"/>
                                         </connections>
                                     </collectionViewCell>

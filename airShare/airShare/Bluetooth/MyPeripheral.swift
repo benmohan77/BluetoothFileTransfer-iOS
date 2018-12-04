@@ -23,13 +23,7 @@ class MyPeripheral: NSObject {
     }
     
     //Go through a set of MyPeripherals and grab the one that has the same CBPeripheral
-    static func getFromCBPeripheral(cbPeripheral : CBPeripheral, set : Set<MyPeripheral>) -> MyPeripheral?{
-        
-        for perph in set {
-            if perph.peripheral!.isEqual(cbPeripheral){
-                return perph
-            }
-        }
-        return nil
+    static func getFromCBPeripheral(cbPeripheral : CBPeripheral, dict : Dictionary<String,MyPeripheral>) -> MyPeripheral?{
+        return dict[cbPeripheral.identifier.uuidString]
     }
 }

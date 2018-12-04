@@ -67,6 +67,9 @@ class Helper {
     }
     
     static func set(name: String, id: String){
+        if(name == "Someone"){
+            print("NOOOOOOOOOOO")
+        }
         let standard = UserDefaults.standard
         standard.set(name, forKey: "id_" + id)
     }

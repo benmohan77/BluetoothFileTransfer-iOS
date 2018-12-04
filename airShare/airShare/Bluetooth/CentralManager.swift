@@ -7,8 +7,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var peripheral:CBPeripheral?
     var dataBuffer:NSMutableData!
     var scanAfterDisconnecting:Bool = true
-    var myPeripherals : Set<MyPeripheral>?
-    var peripherals : Set<CBPeripheral>?
+    var myPeripherals : Dictionary<String,MyPeripheral>?
     var myData : Data?
     
     // MARK: Handling User Interactions
@@ -16,8 +15,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         super.init()
         
         dataBuffer = NSMutableData()
-        myPeripherals = Set()
-        peripherals = Set()
+        myPeripherals = Dictionary<String,MyPeripheral>()
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
@@ -133,25 +131,40 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         
-        if !peripherals!.contains(peripheral){
+        if !myPeripherals!.keys.contains(peripheral.identifier.uuidString){
             print("Discovered \(peripheral.name) at \(RSSI)")
-            peripherals?.insert(peripheral)
+            //peripherals?.insert(peripheral)
+//            myPeripherals![peripheral.identifier.uuidString] = MyPeripheral(peripheral: peripheral)
+//            myPeripherals![peripheral.identifier.uuidString]?.name = peripheral.name
             print(peripheral.identifier)
             let tempMyPeripheral = MyPeripheral(peripheral: peripheral)
             
-            var name = "Error"
-            if let adName = advertisementData[CBAdvertisementDataLocalNameKey] as? String {
-                name = adName
-                Helper.set(name: adName, id: peripheral.identifier.uuidString)
+            var name = Helper.getNameFor(id: peripheral.identifier.uuidString) ?? "Error"
+            if let adName = peripheral.name {//advertisementData[CBAdvertisementDataLocalNameKey] as? String {
+                if adName == "iPhone" {
+                    if let name = advertisementData[CBAdvertisementDataLocalNameKey] as? String{
+                        Helper.set(name: name, id: peripheral.identifier.uuidString)
+                        tempMyPeripheral.name = name
+                        myPeripherals![peripheral.identifier.uuidString] = tempMyPeripheral
+                    }else{
+                        
+                    }
+                }else{
+                    name = adName
+                    Helper.set(name: name, id: peripheral.identifier.uuidString)
+                    tempMyPeripheral.name = name
+                    myPeripherals![peripheral.identifier.uuidString] = tempMyPeripheral
+                }
             }else{
-                name = Helper.getNameFor(id: peripheral.identifier.uuidString) ?? "Someone"
+                name = "Unknown"
             }
             
-            tempMyPeripheral.name = name
-            myPeripherals?.insert(tempMyPeripheral)
+            if(name != "Error"){
+                tempMyPeripheral.name = name
+                myPeripherals![peripheral.identifier.uuidString] = tempMyPeripheral
+            }
             
-            //            let transferSeviceUUID = CBUUID(string: Device.TransferService)
-            //            peripheral.discoverServices([transferSeviceUUID])
+            
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
         }
@@ -199,7 +212,6 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     //MARK: - CBPeripheralDelegate methods
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        
         print("Discovered Services!!!")
         
         if error != nil {
@@ -232,7 +244,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         }
         
         //Get my peripheral
-        let myPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, set: myPeripherals!)
+        let myPeripheral = MyPeripheral.getFromCBPeripheral(cbPeripheral: peripheral, dict: myPeripherals!)
         
         if let characteristics = service.characteristics {
             for characteristic in characteristics {

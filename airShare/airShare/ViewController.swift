@@ -73,12 +73,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "usercell", for: indexPath) as! UserCollectionViewCell
+        let myPeripheral = Array(centralManager!.myPeripherals!.values)[indexPath.row]
         
-        let myPeripheral = Array(centralManager!.myPeripherals!)[indexPath.row] as! MyPeripheral
         
+        cell.subview.layer.cornerRadius = 27
         if let name = myPeripheral.name{
+            cell.letter.text = "\(name.first ?? "%")"
             cell.label.text = name
         }else{
+            cell.letter.text = "N"
             cell.label.text = "No Name"
         }
         
@@ -86,12 +89,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let myPeripheral = Array(centralManager!.myPeripherals!)[indexPath.row] as? MyPeripheral{
+        if let myPeripheral = Array(centralManager!.myPeripherals!.values)[indexPath.row] as? MyPeripheral{
             print("Connecting to \(myPeripheral.name)")
             
             centralManager?.centralManager.connect(myPeripheral.peripheral!, options: nil)
             //            myPeripheral.peripheral!.setNotifyValue(true, for: myPeripheral.transferCharacteristic!)
-            
         }else{
             print("Couldnt find peripheral")
         }
@@ -116,11 +118,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @ objc func updatedData(notif: NSNotification){
-        //var message = String(data: centralManager!.myData!, encoding: .utf8)
-//        var data = centralManager!.myData!
-//        var image = UIImage.init(data: data)
-//        imageView.image = image
-        //        textView!.text = message
+        
+        let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        
+        var message = String(data: centralManager!.myData!, encoding: .utf8)
+        var data = centralManager!.myData!
+        var image = UIImage.init(data: data)
+        
+        let imgViewTitle = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
+        imgViewTitle.image = image
+        
+        alert.view.addSubview(imgViewTitle)
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
     }
     
     @ objc func requestedFiles(notif: NSNotification){
@@ -128,9 +143,35 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         let sendAction = UIAlertAction(title: "Send", style: .default) {
             [unowned self] action in
-            
+            let f = BSImagePickerViewController.init()
+            f.maxNumberOfSelections = 1
+            self.bs_presentImagePickerController(f, animated: true, select: { (asset) in
+                //
+            }, deselect: { (asset) in
+                //
+            }, cancel: { (assetArr) in
+                //
+            }, finish: { (assetArr) in
+                //
+                if let asset = assetArr.first {
+                    let manager = PHImageManager.default()
+                    let option = PHImageRequestOptions()
+                    var thumbnail = UIImage()
+                    option.isSynchronous = true
+                    manager.requestImage(for: asset, targetSize: CGSize(width: 200, height: 100), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+                        thumbnail = result!
+                    })
+                    self.peripheralManager?.imageToSend = thumbnail
+                    self.peripheralManager?.updateValue()
+                }
+                
+            }, completion: {
+                
+            }, selectLimitReached: { (num) in
+                //
+            })
             //Kick off sending data
-            self.peripheralManager?.updateValue()
+            
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {

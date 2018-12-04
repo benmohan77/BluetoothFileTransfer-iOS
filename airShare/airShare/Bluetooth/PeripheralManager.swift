@@ -26,6 +26,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     var currentTextSnapshot = ""
     var sendingTextData = false
     var count = 0
+    var imageToSend: UIImage?
     
     override init() {
         super.init()
@@ -43,18 +44,13 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
         print("captureCurrentText")
         
         if !sendingTextData {
-            //            print("Not currently sending data. Capturing snapshot and will send it over!")
             count += 1
-            //            currentTextSnapshot = testText + " \(count)"
-            //            dataToSend = currentTextSnapshot.data(using: String.Encoding.utf8)
-            //            dataToSend = UIImage(named: "ExampleFile")!.pngData()
-            //            dataToSend = UIImage(named: "Image")!.pngData()
-            dataToSend = UIImage(named: "ExampleFile")!.pngData()
-            
-            print("Total Data to send \(dataToSend?.count)")
-            
-            sendDataIndex = 0
-            sendTextData()
+            if let image = imageToSend {
+                dataToSend = image.pngData()
+                sendDataIndex = 0
+                sendTextData()
+                print("Total Data to send \(dataToSend?.count)")
+            }
         } else {
             print("Currently sending data. Will wait to capture in a second...")
         }
@@ -143,6 +139,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                     // If the send was successful, then we're done, otherwise we'll send it next time
                     sendingEOM = false
                     print("Successfully sent EOM!!!");
+                    imageToSend = nil
                     
                     // turn off sending flag
                     sendingTextData = false
@@ -203,8 +200,9 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     }
     
     func updateValue(){
-        captureCurrentText()
-        //        sendTextData()
+        if(imageToSend != nil){
+            captureCurrentText()
+        }
     }
     
     func sendEOM(){
