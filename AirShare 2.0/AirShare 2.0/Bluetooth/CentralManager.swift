@@ -136,7 +136,12 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         if !peripherals!.contains(peripheral){
             print("Discovered \(peripheral.name) at \(RSSI)")
             peripherals?.insert(peripheral)
-            myPeripherals?.insert(MyPeripheral(peripheral: peripheral))
+            
+            let tempMyPeripheral = MyPeripheral(peripheral: peripheral)
+            tempMyPeripheral.name = advertisementData[CBAdvertisementDataLocalNameKey] as! String
+            
+            myPeripherals?.insert(tempMyPeripheral)
+            
 //            let transferSeviceUUID = CBUUID(string: Device.TransferService)
 //            peripheral.discoverServices([transferSeviceUUID])
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatePeripherals"), object: nil)
