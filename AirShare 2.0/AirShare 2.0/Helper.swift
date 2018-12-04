@@ -11,7 +11,7 @@ import UIKit
 
 class Helper {
     
-    static func askForName(vc: UIViewController){
+    static func askForName(vc: UIViewController, callback: @escaping ()->()){
         var textField: UITextField?
         
         // create alertController
@@ -31,6 +31,7 @@ class Helper {
                 if inputValue != "" {
                     Helper.set(name: inputValue)
                     alertController.dismiss(animated: true, completion: nil)
+                    callback()
                 }
             }
         }))

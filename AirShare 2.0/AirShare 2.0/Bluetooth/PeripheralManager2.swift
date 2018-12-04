@@ -159,14 +159,14 @@ class PeripheralManager2: NSObject, CBPeripheralManagerDelegate {
         if peripheral.state != .poweredOn {
             return
         }
-        peripheralManager?.startAdvertising([CBAdvertisementDataLocalNameKey : "Aaron", CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
+        peripheralManager?.startAdvertising([CBAdvertisementDataLocalNameKey : (Helper.getName() ?? "Someone"), CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
         
         print("Bluetooth is Powered Up!!!")
         
         // create service characteristics
         self.transferCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.TransferCharacteristic), properties: .notify, value: nil, permissions: .readable)
         
-        self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: "Tyler".data(using: .utf8)!, permissions: .readable)
+        self.nameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.NameCharacteristic), properties: .read, value: (Helper.getName() ?? "Someone").data(using: .utf8)!, permissions: .readable)
         
         self.centralNameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.CentralNameCharacteristic), properties: .writeWithoutResponse, value: nil, permissions: .writeable)
 

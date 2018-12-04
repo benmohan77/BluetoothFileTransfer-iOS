@@ -42,18 +42,26 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         collectionView.dataSource = self
         
         //Bluetooth
-        centralManager = CentralManager.init()
-        peripheralManager = PeripheralManager2.init()
+        
     }
     
     override func viewDidLayoutSubviews() {
         if(Helper.getName() == nil){
-            Helper.askForName(vc: self)
+            Helper.askForName(vc: self, callback: {
+                self.setManagers()
+            })
+        }else{
+            self.setManagers()
         }
+    }
+    
+    func setManagers(){
+        centralManager = CentralManager.init()
+        peripheralManager = PeripheralManager2.init()
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return centralManager!.myPeripherals!.count
+        return centralManager?.myPeripherals?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

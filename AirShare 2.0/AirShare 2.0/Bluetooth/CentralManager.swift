@@ -242,7 +242,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     peripheral.readValue(for: characteristic)
                 }else if characteristic.uuid == CBUUID(string: Device.CentralNameCharacteristic){
                     print("found central name characteristic")
-                    self.peripheral?.writeValue("Aaron".data(using: .utf8)!, for: characteristic, type: CBCharacteristicWriteType.withoutResponse)
+                    self.peripheral?.writeValue((Helper.getName() ?? "Someone").data(using: .utf8)!, for: characteristic, type: CBCharacteristicWriteType.withoutResponse)
                 }
             }
         }
