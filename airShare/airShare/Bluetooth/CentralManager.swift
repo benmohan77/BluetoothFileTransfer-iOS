@@ -10,6 +10,8 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     var myPeripherals : Dictionary<String,MyPeripheral>?
     var myData : Data?
     
+    var byteCount : Int?
+    
     // MARK: Handling User Interactions
     override init() {
         super.init()
@@ -263,6 +265,9 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 }else if characteristic.uuid == CBUUID(string: Device.CentralNameCharacteristic){
                     print("found central name characteristic")
                     self.peripheral?.writeValue((Helper.getName() ?? "Someone").data(using: .utf8)!, for: characteristic, type: CBCharacteristicWriteType.withoutResponse)
+                }else if characteristic.uuid == CBUUID(string: Device.ByteCountCharacteristic) {
+                    peripheral.setNotifyValue(true, for: characteristic)
+                    print("found byte count characteristic")
                 }
             }
         }
@@ -302,6 +307,11 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                 }
             }else{
                 dataBuffer.append(value)
+            }
+        }else if characteristic.uuid == CBUUID(string: Device.ByteCountCharacteristic){
+            if let numString = String(data: value, encoding: .utf8){
+                self.byteCount = Int(numString)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateByteCount"), object: nil)
             }
         }
         

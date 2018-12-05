@@ -15,6 +15,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     var transferCharacteristic : CBMutableCharacteristic?
     var nameCharacteristic : CBMutableCharacteristic?
     var centralNameCharacteristic : CBMutableCharacteristic?
+    var byteCountCharacteristic : CBMutableCharacteristic?
     
     var centralName : String?
     
@@ -50,6 +51,9 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                 sendDataIndex = 0
                 sendTextData()
                 print("Total Data to send \(dataToSend?.count)")
+            
+                
+                self.peripheralManager?.updateValue(String("\(dataToSend?.count)").data(using: .utf8)!, for: self.byteCountCharacteristic!, onSubscribedCentrals: nil)
             }
         } else {
             print("Currently sending data. Will wait to capture in a second...")
@@ -167,11 +171,13 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
         
         self.centralNameCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.CentralNameCharacteristic), properties: .writeWithoutResponse, value: nil, permissions: .writeable)
         
+        self.byteCountCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.ByteCountCharacteristic), properties: .notify, value: nil, permissions: .readable)
+        
         // create the service
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
         
         // add characteristic to the service
-        service.characteristics = [self.nameCharacteristic!, self.transferCharacteristic!, self.centralNameCharacteristic!]
+        service.characteristics = [self.nameCharacteristic!, self.transferCharacteristic!, self.centralNameCharacteristic!, self.byteCountCharacteristic!]
         
         // add service to the peripheral manager
         self.peripheralManager?.add(service)

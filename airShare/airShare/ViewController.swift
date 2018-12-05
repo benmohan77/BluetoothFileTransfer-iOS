@@ -34,6 +34,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.requestedFiles), name: NSNotification.Name(rawValue: "requestedFiles"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateByteCount), name: NSNotification.Name(rawValue: "updateByteCount"), object: nil)
+        
+        
         collectionView.isScrollEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -121,6 +124,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @ objc func updatedData(notif: NSNotification){
         let data = centralManager!.myData!
         Helper.alert(data: data, vc: self)
+    }
+    
+    @ objc func updateByteCount(){
+        print("Got bytes in the view controller! \(centralManager?.byteCount!)")
     }
     
     @ objc func requestedFiles(notif: NSNotification){
