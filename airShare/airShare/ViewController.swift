@@ -102,6 +102,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let impact  = UIImpactFeedbackGenerator()
+        impact.impactOccurred()
+        
         if let myPeripheral = Array(centralManager!.myPeripherals!.values)[indexPath.row] as? MyPeripheral{
             
             print("Connecting to \(myPeripheral.name)")

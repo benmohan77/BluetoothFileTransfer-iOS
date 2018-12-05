@@ -173,6 +173,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Azf-99-p2f">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                            </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4L-mg-s5G">
                                 <rect key="frame" x="50" y="262" width="275" height="143"/>
                                 <subviews>
@@ -226,6 +229,8 @@
                             <constraint firstItem="9D8-9W-Iga" firstAttribute="top" secondItem="0CI-6l-oiM" secondAttribute="top" id="2WO-3T-RzZ"/>
                             <constraint firstItem="9D8-9W-Iga" firstAttribute="trailing" secondItem="72Q-zv-nSe" secondAttribute="trailing" id="6Lw-B6-Dh5"/>
                             <constraint firstItem="Z4L-mg-s5G" firstAttribute="leading" secondItem="72Q-zv-nSe" secondAttribute="leading" constant="50" id="8Lx-83-L3f"/>
+                            <constraint firstItem="Azf-99-p2f" firstAttribute="centerX" secondItem="0CI-6l-oiM" secondAttribute="centerX" id="EVb-2N-aUw"/>
+                            <constraint firstItem="Azf-99-p2f" firstAttribute="centerY" secondItem="0CI-6l-oiM" secondAttribute="centerY" id="FfB-k3-oc5"/>
                             <constraint firstItem="72Q-zv-nSe" firstAttribute="trailing" secondItem="Z4L-mg-s5G" secondAttribute="trailing" constant="50" id="IBJ-w1-2Si"/>
                             <constraint firstItem="9D8-9W-Iga" firstAttribute="leading" secondItem="72Q-zv-nSe" secondAttribute="leading" id="Vt9-PX-9kj"/>
                             <constraint firstItem="Z4L-mg-s5G" firstAttribute="centerY" secondItem="0CI-6l-oiM" secondAttribute="centerY" id="X5j-aS-auE"/>
@@ -234,10 +239,12 @@
                         <viewLayoutGuide key="safeArea" id="72Q-zv-nSe"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="Azf-99-p2f" id="9nK-Un-v3g"/>
                         <outlet property="backgroundView" destination="9D8-9W-Iga" id="XGO-DM-Xw4"/>
                         <outlet property="buttonOutlet" destination="nuw-Q4-D4G" id="YSc-yk-eCL"/>
                         <outlet property="foregroundView" destination="Z4L-mg-s5G" id="1y3-YT-ASv"/>
                         <outlet property="label" destination="Ct8-I8-G6P" id="WRo-Ki-Hte"/>
+                        <outlet property="line" destination="eBi-Dv-jly" id="MOm-hv-QJu"/>
                         <outlet property="progress" destination="pat-sb-Vmj" id="mrH-3r-xoG"/>
                     </connections>
                 </viewController>

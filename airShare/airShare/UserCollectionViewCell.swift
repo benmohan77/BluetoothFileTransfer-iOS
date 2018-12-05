@@ -13,4 +13,5 @@ class UserCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var letter: UILabel!
     @IBOutlet weak var label: UILabel!
+    
 }

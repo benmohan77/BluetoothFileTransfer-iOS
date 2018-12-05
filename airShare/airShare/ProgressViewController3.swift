@@ -19,6 +19,10 @@ class ProgressViewController: UIViewController {
         impact.impactOccurred()
     }
     
+    @IBOutlet weak var line: UIView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     var labelText = ""
     var progressVal: Float = 0
     
