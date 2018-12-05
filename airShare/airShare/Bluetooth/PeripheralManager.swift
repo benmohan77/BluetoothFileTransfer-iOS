@@ -53,7 +53,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                         let scale =  sqrt ( 50000.0 / CGFloat(ogData.count) )
                         let newWidth = image.size.width * scale
                         let newHeight = image.size.height * scale
-                        print("Height: \(newHeight) Width: \(newWidth)")
+//                        print("Height: \(newHeight) Width: \(newWidth)")
                         newData = Helper.resizeImage(image: image, targetSize: CGSize(width: newWidth, height: newHeight)).pngData()!
                     }else{
                         newData = ogData
@@ -61,7 +61,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                     print("New     : \(newData.count) bytes")
                     dataToSend = newData
                     sendDataIndex = 0
-                    print("Total Data to send \(dataToSend!.count)")
+//                    print("Total Data to send \(dataToSend!.count)")
                     
                     let byteNum = String("\(dataToSend!.count)").data(using: .utf8)!
 
@@ -97,13 +97,13 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
         
         // Is it time for the EOM message?
         if sendingEOM {
-            print("Attempting to send EOM...")
+//            print("Attempting to send EOM...")
             
             let didSend = peripheralManager.updateValue(Device.EOM.data(using: String.Encoding.utf8)!, for: transferCharacteristic, onSubscribedCentrals: nil)
             
             if didSend {
                 sendingEOM = false
-                print("EOM Sent!!!")
+                print("Image was sent")
                 sendingTextData = false
             }
             return

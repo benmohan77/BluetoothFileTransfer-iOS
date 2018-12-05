@@ -42,6 +42,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         collectionView.dataSource = self
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         updateCollectView()
+        pullup()
+    }
+    
+    func pullup(){
+        DispatchQueue.main.async {
+            sleep(5)
+            if let progressView = ProgressViewController.presentOn(viewController: self){
+                print("worked")
+            }else{
+                print("failed")
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {
