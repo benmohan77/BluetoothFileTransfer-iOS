@@ -61,10 +61,9 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                     print("New     : \(newData.count) bytes")
                     dataToSend = newData
                     sendDataIndex = 0
-                    sendTextData()
-                    print("Total Data to send \(dataToSend?.count)")
+                    print("Total Data to send \(dataToSend!.count)")
                     
-                    let byteNum = String("\(dataToSend?.count)").data(using: .utf8)!
+                    let byteNum = String("\(dataToSend!.count)").data(using: .utf8)!
 
                     guard let byteCountCharacteristic = self.byteCountCharacteristic else {
                         print("No bytecount characteristic available!!!")
@@ -76,6 +75,8 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                     if !didSend{
                         print("Byte Count was not sent")
                     }
+                    
+                    sendTextData()
                 }
             }
         } else {
