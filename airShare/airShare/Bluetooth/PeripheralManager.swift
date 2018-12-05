@@ -16,9 +16,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     var nameCharacteristic : CBMutableCharacteristic?
     var centralNameCharacteristic : CBMutableCharacteristic?
     var byteCountCharacteristic : CBMutableCharacteristic?
-    
     var centralName : String?
-    
     var dataToSend:Data?
     var sendDataIndex = 0
     let notifyMTU = 20
@@ -47,22 +45,37 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
         if !sendingTextData {
             count += 1
             if let image = imageToSend {
-                dataToSend = image.pngData()
-                sendDataIndex = 0
-                sendTextData()
-                print("Total Data to send \(dataToSend?.count)")
-            
-                let byteNum = String("\(dataToSend?.count)").data(using: .utf8)!
+
+                if let ogData = image.pngData() {
+                    print("Original: \(ogData.count) bytes")
+                    var newData: Data!
+                    if(ogData.count > 50000){
+                        let scale =  sqrt ( 50000.0 / CGFloat(ogData.count) )
+                        let newWidth = image.size.width * scale
+                        let newHeight = image.size.height * scale
+                        print("Height: \(newHeight) Width: \(newWidth)")
+                        newData = Helper.resizeImage(image: image, targetSize: CGSize(width: newWidth, height: newHeight)).pngData()!
+                    }else{
+                        newData = ogData
+                    }
+                    print("New     : \(newData.count) bytes")
+                    dataToSend = newData
+                    sendDataIndex = 0
+                    sendTextData()
+                    print("Total Data to send \(dataToSend?.count)")
+                    
+                    let byteNum = String("\(dataToSend?.count)").data(using: .utf8)!
+
+                    guard let byteCountCharacteristic = self.byteCountCharacteristic else {
+                        print("No bytecount characteristic available!!!")
+                        return
+                    }
                 
-                guard let byteCountCharacteristic = self.byteCountCharacteristic else {
-                    print("No bytecount characteristic available!!!")
-                    return
-                }
-                
-                let didSend = peripheralManager!.updateValue(byteNum, for: byteCountCharacteristic, onSubscribedCentrals: nil)
-                
-                if !didSend{
-                    print("Byte Count was not sent")
+                    let didSend = peripheralManager!.updateValue(byteNum, for: byteCountCharacteristic, onSubscribedCentrals: nil)
+
+                    if !didSend{
+                        print("Byte Count was not sent")
+                    }
                 }
             }
         } else {
@@ -116,7 +129,8 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             // ---- Prepare the next message chunk
             // Determine chunk size
             var amountToSend = dataToSend.count - sendDataIndex
-//            print("Next amout to send: \(amountToSend)")
+
+            //print("Next amout to send: \(amountToSend)")
             
             // we have a 20-byte limit, so if the amount to send is greater than 20, then clamp it down to 20.
             if (amountToSend > Device.notifyMTU) {
@@ -135,6 +149,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             // If it didn't work, drop out and wait for the callback
             if !didSend {
 //                print("Update Failed")
+
                 return
             }
             
@@ -229,5 +244,32 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             print("EOM Sent!!!")
             sendingTextData = false
         }
+    }
+}
+
+extension UIImage {
+    // MARK: - UIImage+Resize
+    func compressTo(_ expectedSizeInKb:Int) -> UIImage? {
+        let sizeInBytes = expectedSizeInKb * 1024
+        var needCompress:Bool = true
+        var imgData:Data?
+        var compressingValue:CGFloat = 1.0
+        while (needCompress && compressingValue > 0.0) {
+            if let data:Data = self.jpegData(compressionQuality: compressingValue) {//UIImageJPEGRepresentation(self, compressingValue) {
+                if data.count < sizeInBytes {
+                    needCompress = false
+                    imgData = data
+                } else {
+                    compressingValue -= 0.1
+                }
+            }
+        }
+        
+        if let data = imgData {
+            if (data.count < sizeInBytes) {
+                return UIImage(data: data)
+            }
+        }
+        return nil
     }
 }
