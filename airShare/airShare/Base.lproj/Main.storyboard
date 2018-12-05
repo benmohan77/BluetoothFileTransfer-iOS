@@ -35,14 +35,8 @@
                                     <constraint firstAttribute="height" constant="80" id="VGm-Hs-GTW"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your device is broadcasting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mce-x5-FSi">
-                                <rect key="frame" x="82" y="115" width="211" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JXd-rR-P53">
-                                <rect key="frame" x="0.0" y="161" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="90" width="375" height="30"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Okp-dc-CfZ">
                                         <rect key="frame" x="15" y="14.5" width="345" height="1"/>
@@ -71,8 +65,8 @@
                                     <constraint firstAttribute="height" constant="30" id="pxg-Ef-K9z"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Sk-KC-JZY">
-                                <rect key="frame" x="0.0" y="191" width="375" height="111"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7Sk-KC-JZY">
+                                <rect key="frame" x="0.0" y="120" width="375" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="4jg-rw-etu"/>
@@ -85,7 +79,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="usercell" id="k6i-HZ-j8B" customClass="UserCollectionViewCell" customModule="airShare" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="9" width="75" height="93"/>
+                                        <rect key="frame" x="0.0" y="3.5" width="75" height="93"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="75" height="93"/>
@@ -138,23 +132,20 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="7Sk-KC-JZY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4Og-9f-cfA"/>
-                            <constraint firstItem="Mce-x5-FSi" firstAttribute="top" secondItem="MF6-hJ-Wkl" secondAttribute="bottom" constant="35" id="6ze-sL-uKL"/>
                             <constraint firstItem="JXd-rR-P53" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7lQ-XC-EE2"/>
                             <constraint firstItem="MF6-hJ-Wkl" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Blz-dO-zVx"/>
                             <constraint firstItem="MF6-hJ-Wkl" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="EVW-KG-L8n"/>
+                            <constraint firstItem="JXd-rR-P53" firstAttribute="top" secondItem="MF6-hJ-Wkl" secondAttribute="bottom" constant="10" id="Mdh-17-LIC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Sk-KC-JZY" secondAttribute="trailing" id="OhI-c2-Ryb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JXd-rR-P53" secondAttribute="trailing" id="Qzv-TV-Bw7"/>
                             <constraint firstItem="MF6-hJ-Wkl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gsv-P2-dAs"/>
                             <constraint firstItem="7Sk-KC-JZY" firstAttribute="top" secondItem="JXd-rR-P53" secondAttribute="bottom" id="nLa-N4-SlU"/>
-                            <constraint firstItem="JXd-rR-P53" firstAttribute="top" secondItem="Mce-x5-FSi" secondAttribute="bottom" constant="25" id="pjf-Gu-18Q"/>
-                            <constraint firstItem="Mce-x5-FSi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xLT-VH-1rQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="4NK-Ma-ivl"/>
                     <connections>
                         <outlet property="collectionView" destination="7Sk-KC-JZY" id="srm-Yl-zFF"/>
-                        <outlet property="statusLabel" destination="Mce-x5-FSi" id="uPC-5A-QR9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

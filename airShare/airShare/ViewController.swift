@@ -190,8 +190,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         alert.addAction(sendAction)
         alert.addAction(cancelAction)
+        self.progressVC!.d {
+            self.present(alert, animated: true)
+        }
         
-        present(alert, animated: true)
         
         //Send local notification
         let identifier = "UYLLocalNotification"
