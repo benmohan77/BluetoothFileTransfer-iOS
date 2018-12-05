@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var statusLabel: UILabel!
     var centralManager : CentralManager?
     var peripheralManager : PeripheralManager?
+    var progressObject : ProgressObject?
     
     override func viewDidLoad() {
         let center = UNUserNotificationCenter.current()
@@ -55,8 +56,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func setManagers(){
+        var progressObject = ProgressObject()
         centralManager = CentralManager()
+        centralManager?.progressObject = progressObject
         peripheralManager = PeripheralManager()
+        peripheralManager?.progressObject = progressObject
     }
     
     func updateCollectView() {

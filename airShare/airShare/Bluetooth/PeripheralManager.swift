@@ -27,6 +27,8 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     var count = 0
     var imageToSend: UIImage?
     
+    var progressObject : ProgressObject?
+    
     override init() {
         super.init()
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil)
@@ -76,6 +78,8 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                         print("Byte Count was not sent")
                     }
                     
+                    progressObject?.updateTotalByteCount(newTotalByteCount: dataToSend!.count)
+                    progressObject?.updateState(newState: ProgressObject.State.sending)
                     sendTextData()
                 }
             }
@@ -150,7 +154,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             // If it didn't work, drop out and wait for the callback
             if !didSend {
 //                print("Update Failed")
-
+                progressObject?.updateCurrentByteCount(newCurrentByteCount: self.sendDataIndex)
                 return
             }
             
@@ -174,6 +178,8 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                     
                     // turn off sending flag
                     sendingTextData = false
+                    
+                    progressObject?.updateState(newState: ProgressObject.State.resting)
                 }
                 
                 return;

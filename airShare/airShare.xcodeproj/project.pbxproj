@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2A6F55321B87F3400644B58 /* ProgressObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2A6F55221B87F3400644B58 /* ProgressObject.swift */; };
 		B2B2EEBD219A5FCE0056E61E /* CentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B2EEBC219A5FCE0056E61E /* CentralManager.swift */; };
 		B2B2EEBF219A61570056E61E /* PeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B2EEBE219A61570056E61E /* PeripheralManager.swift */; };
 		B94595342198B42600B116B2 /* FileList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B94595332198B42600B116B2 /* FileList.swift */; };
@@ -58,6 +59,7 @@
 /* Begin PBXFileReference section */
 		04528840A999AE35D8FDC54C /* Pods-airShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airShare.release.xcconfig"; path = "airShare/Pods/Target Support Files/Pods-airShare/Pods-airShare.release.xcconfig"; sourceTree = "<group>"; };
 		89B303D12A41F20EABAA28D0 /* Pods-airShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-airShare.debug.xcconfig"; path = "airShare/Pods/Target Support Files/Pods-airShare/Pods-airShare.debug.xcconfig"; sourceTree = "<group>"; };
+		B2A6F55221B87F3400644B58 /* ProgressObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressObject.swift; sourceTree = "<group>"; };
 		B2B2EEBC219A5FCE0056E61E /* CentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManager.swift; sourceTree = "<group>"; };
 		B2B2EEBE219A61570056E61E /* PeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralManager.swift; sourceTree = "<group>"; };
 		B94595332198B42600B116B2 /* FileList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileList.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				B2B2EEBE219A61570056E61E /* PeripheralManager.swift */,
 				B9CC20D621B481C700701CE4 /* Device.swift */,
 				B9CC20D821B4825A00701CE4 /* MyPeripheral.swift */,
+				B2A6F55221B87F3400644B58 /* ProgressObject.swift */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -162,9 +165,9 @@
 			children = (
 				B2B2EEBB219A5F180056E61E /* Bluetooth */,
 				B9BB6907219888830009FF7B /* AttachmentHandler.swift */,
+				B9BB68E021935B590009FF7B /* ViewController.swift */,
 				B9BB690421935D430009FF7B /* airShare.entitlements */,
 				B9BB68DE21935B590009FF7B /* AppDelegate.swift */,
-				B9BB68E021935B590009FF7B /* ViewController.swift */,
 				B94595352198D17500B116B2 /* miniCollectionViewCell.swift */,
 				B9BB68E221935B590009FF7B /* Main.storyboard */,
 				B9BB68E521935B5A0009FF7B /* Assets.xcassets */,
@@ -368,6 +371,7 @@
 			files = (
 				B9CC20D721B481C700701CE4 /* Device.swift in Sources */,
 				B9BB690E2198AA9D0009FF7B /* Photo.swift in Sources */,
+				B2A6F55321B87F3400644B58 /* ProgressObject.swift in Sources */,
 				B9BB690C21989E650009FF7B /* File.swift in Sources */,
 				B2B2EEBF219A61570056E61E /* PeripheralManager.swift in Sources */,
 				B94595362198D17500B116B2 /* miniCollectionViewCell.swift in Sources */,
