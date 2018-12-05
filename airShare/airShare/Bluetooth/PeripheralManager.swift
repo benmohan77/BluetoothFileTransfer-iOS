@@ -109,6 +109,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                 sendingEOM = false
                 print("Image was sent")
                 sendingTextData = false
+                progressObject?.updateState(newState: .resting)
             }
             return
         }

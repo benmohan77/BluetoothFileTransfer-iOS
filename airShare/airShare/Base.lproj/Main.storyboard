@@ -238,7 +238,7 @@
                         <outlet property="buttonOutlet" destination="nuw-Q4-D4G" id="YSc-yk-eCL"/>
                         <outlet property="foregroundView" destination="Z4L-mg-s5G" id="1y3-YT-ASv"/>
                         <outlet property="label" destination="Ct8-I8-G6P" id="WRo-Ki-Hte"/>
-                        <outlet property="progressView" destination="X5j-aS-auE" id="UeS-Gf-DwJ"/>
+                        <outlet property="progress" destination="pat-sb-Vmj" id="mrH-3r-xoG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hDn-4b-Vp3" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -18,7 +18,7 @@ enum Types {
 
 class Helper {
     
-    static func askForName(vc: UIViewController, callback: @escaping ()->()){
+    static func askForName(vc: ViewController, callback: @escaping ()->()){
         var textField: UITextField?
         
         // create alertController
@@ -45,7 +45,10 @@ class Helper {
         
         // show alert controller
         DispatchQueue.main.async {
-            vc.present(alertController, animated: true, completion: nil)
+            vc.progressVC!.dismiss(animated: true, completion: {
+                
+            })
+            
         }
         
     }
@@ -74,7 +77,7 @@ class Helper {
         standard.set(name, forKey: "id_" + id)
     }
     
-    static func alert(data: Data, vc: UIViewController){
+    static func alert(data: Data, vc: ViewController){
         if let image = UIImage.init(data: data){
             let alert = UIAlertController(title: "File Received!", message: "", preferredStyle: .alert)
             let action = UIAlertAction(title: "Accept", style: .default) { (alert) in
@@ -100,28 +103,30 @@ class Helper {
             print(alert.view.frame.width)
             DispatchQueue.main.async {
                 alert.view.alpha = 0
-                vc.present(alert, animated: true) {
-                    let imageWidth = image.size.width
-                    let imageHeight = image.size.height
-                    let alertWidth = alert.view.frame.size.width
-                    
-                    let scale:CGFloat = alertWidth / imageWidth
-                    
-                    let newHeight = scale * imageHeight
-                    let newWidth = scale * imageWidth
-                    let imgViewTitle = UIImageView(frame: CGRect(x: 0, y: 55, width: newWidth, height: newHeight))
-                    
-                    imgViewTitle.image = resizeImage(image: image, targetSize: CGSize(width: newWidth, height: newHeight))
-                    
-                    alert.view.addSubview(imgViewTitle)
-                    
-                    
-                    let desiredHeight: CGFloat = newHeight + 100
-                    var height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: desiredHeight)
-                    alert.view.addConstraint(height);
-                    UIView.animate(withDuration: 0.4, animations: {
-                        alert.view.alpha = 1
-                    })
+                vc.progressVC!.d {
+                    vc.present(alert, animated: true) {
+                        let imageWidth = image.size.width
+                        let imageHeight = image.size.height
+                        let alertWidth = alert.view.frame.size.width
+                        
+                        let scale:CGFloat = alertWidth / imageWidth
+                        
+                        let newHeight = scale * imageHeight
+                        let newWidth = scale * imageWidth
+                        let imgViewTitle = UIImageView(frame: CGRect(x: 0, y: 55, width: newWidth, height: newHeight))
+                        
+                        imgViewTitle.image = resizeImage(image: image, targetSize: CGSize(width: newWidth, height: newHeight))
+                        
+                        alert.view.addSubview(imgViewTitle)
+                        
+                        
+                        let desiredHeight: CGFloat = newHeight + 100
+                        var height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: desiredHeight)
+                        alert.view.addConstraint(height);
+                        UIView.animate(withDuration: 0.4, animations: {
+                            alert.view.alpha = 1
+                        })
+                    }
                 }
             }
             

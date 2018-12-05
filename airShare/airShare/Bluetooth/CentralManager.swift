@@ -310,11 +310,11 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     dataBuffer.length = 0
                     self.disconnect()
                 }else{
-                    progressObject?.updateCurrentByteCount(newCurrentByteCount: progressObject!.currentByteCount + 1)
+                    progressObject?.updateCurrentByteCount(newCurrentByteCount: progressObject!.currentByteCount + 20)
                     dataBuffer.append(value)
                 }
             }else{
-                progressObject?.updateCurrentByteCount(newCurrentByteCount: progressObject!.currentByteCount + 1)
+                progressObject?.updateCurrentByteCount(newCurrentByteCount: progressObject!.currentByteCount + 20)
                 dataBuffer.append(value)
             }
         }else if characteristic.uuid == CBUUID(string: Device.ByteCountCharacteristic){
