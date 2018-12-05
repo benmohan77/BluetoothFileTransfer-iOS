@@ -90,17 +90,19 @@ class ProgressViewController: UIViewController {
     }
     
     func d(callback: @escaping ()->()){
-        
-        print("D Callback called")
-        UIView.animate(withDuration: 0.4, animations: {
-            self.backgroundView.alpha = 0
-            self.foregroundView.alpha = 0
-        }, completion: { (val) in
-            self.dismiss(animated: true) {
-                callback()
-                self.inView = false
-            }
-        })
+        if(inView){
+            print("D Callback called")
+            UIView.animate(withDuration: 0.4, animations: {
+                self.backgroundView.alpha = 0
+                self.foregroundView.alpha = 0
+            }, completion: { (val) in
+                self.dismiss(animated: true) {
+                    callback()
+                    self.inView = false
+                }
+            })
+        }
+        callback()
     }
     
     var prevState = ProgressObject.State.resting
