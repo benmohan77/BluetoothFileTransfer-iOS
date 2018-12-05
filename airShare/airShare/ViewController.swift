@@ -158,6 +158,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 //
             }, cancel: { (assetArr) in
                 //
+                self.peripheralManager?.sendEOM()
+                
             }, finish: { (assetArr) in
                 //
                 if let asset = assetArr.first {
