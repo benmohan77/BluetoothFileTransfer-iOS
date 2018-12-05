@@ -267,7 +267,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     self.peripheral?.writeValue((Helper.getName() ?? "Someone").data(using: .utf8)!, for: characteristic, type: CBCharacteristicWriteType.withoutResponse)
                 }else if characteristic.uuid == CBUUID(string: Device.ByteCountCharacteristic) {
                     peripheral.setNotifyValue(true, for: characteristic)
-                    print("found byte count characteristic")
+                    print("found byteCount characteristic")
                 }
             }
         }

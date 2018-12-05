@@ -52,8 +52,13 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                 sendTextData()
                 print("Total Data to send \(dataToSend?.count)")
             
+                let byteNum = String("\(dataToSend?.count)").data(using: .utf8)!
                 
-                self.peripheralManager?.updateValue(String("\(dataToSend?.count)").data(using: .utf8)!, for: self.byteCountCharacteristic!, onSubscribedCentrals: nil)
+                let didSend = peripheralManager!.updateValue(byteNum, for: self.byteCountCharacteristic!, onSubscribedCentrals: nil)
+                
+                if !didSend{
+                    print("Byte Count was not sent")
+                }
             }
         } else {
             print("Currently sending data. Will wait to capture in a second...")
@@ -76,6 +81,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             print("Attempting to send EOM...")
             
             let didSend = peripheralManager.updateValue(Device.EOM.data(using: String.Encoding.utf8)!, for: transferCharacteristic, onSubscribedCentrals: nil)
+            
             if didSend {
                 sendingEOM = false
                 print("EOM Sent!!!")
