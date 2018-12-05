@@ -177,7 +177,7 @@
                                 <rect key="frame" x="169" y="315" width="37" height="37"/>
                             </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4L-mg-s5G">
-                                <rect key="frame" x="50" y="262" width="275" height="143"/>
+                                <rect key="frame" x="50" y="282" width="275" height="103"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recieving.." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ct8-I8-G6P">
                                         <rect key="frame" x="91" y="18" width="93" height="23"/>
@@ -188,39 +188,15 @@
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pat-sb-Vmj">
                                         <rect key="frame" x="20" y="71" width="235" height="2"/>
                                     </progressView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBi-Dv-jly">
-                                        <rect key="frame" x="0.0" y="102" width="275" height="1"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="kPd-Bn-jaK"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuw-Q4-D4G">
-                                        <rect key="frame" x="0.0" y="103" width="275" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="V09-aI-KmX"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Button"/>
-                                        <connections>
-                                            <action selector="buttonAction:" destination="24c-3g-MXe" eventType="touchUpInside" id="vo8-al-81p"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="pat-sb-Vmj" firstAttribute="top" secondItem="Ct8-I8-G6P" secondAttribute="bottom" constant="30" id="00Y-qn-TB3"/>
-                                    <constraint firstItem="nuw-Q4-D4G" firstAttribute="top" secondItem="pat-sb-Vmj" secondAttribute="bottom" constant="30" id="J7R-jN-Hty"/>
                                     <constraint firstItem="Ct8-I8-G6P" firstAttribute="top" secondItem="Z4L-mg-s5G" secondAttribute="top" constant="18" id="Ov1-5y-WZ7"/>
-                                    <constraint firstAttribute="trailing" secondItem="eBi-Dv-jly" secondAttribute="trailing" id="TCz-qP-efC"/>
+                                    <constraint firstAttribute="bottom" secondItem="pat-sb-Vmj" secondAttribute="bottom" constant="30" id="Sj0-EM-m4G"/>
                                     <constraint firstAttribute="trailing" secondItem="pat-sb-Vmj" secondAttribute="trailing" constant="20" id="btc-wj-K0d"/>
                                     <constraint firstItem="Ct8-I8-G6P" firstAttribute="centerX" secondItem="Z4L-mg-s5G" secondAttribute="centerX" id="gzZ-B5-OCx"/>
-                                    <constraint firstItem="eBi-Dv-jly" firstAttribute="leading" secondItem="Z4L-mg-s5G" secondAttribute="leading" id="igG-fX-7dV"/>
-                                    <constraint firstItem="nuw-Q4-D4G" firstAttribute="leading" secondItem="Z4L-mg-s5G" secondAttribute="leading" id="pn5-8n-hmv"/>
-                                    <constraint firstItem="nuw-Q4-D4G" firstAttribute="top" secondItem="eBi-Dv-jly" secondAttribute="bottom" id="qeD-JN-qJK"/>
                                     <constraint firstItem="pat-sb-Vmj" firstAttribute="leading" secondItem="Z4L-mg-s5G" secondAttribute="leading" constant="20" id="taU-ck-cMs"/>
-                                    <constraint firstAttribute="trailing" secondItem="nuw-Q4-D4G" secondAttribute="trailing" id="uQj-GU-xxe"/>
-                                    <constraint firstAttribute="bottom" secondItem="nuw-Q4-D4G" secondAttribute="bottom" id="viT-Xg-H5s"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -241,10 +217,8 @@
                     <connections>
                         <outlet property="activityIndicator" destination="Azf-99-p2f" id="9nK-Un-v3g"/>
                         <outlet property="backgroundView" destination="9D8-9W-Iga" id="XGO-DM-Xw4"/>
-                        <outlet property="buttonOutlet" destination="nuw-Q4-D4G" id="YSc-yk-eCL"/>
                         <outlet property="foregroundView" destination="Z4L-mg-s5G" id="1y3-YT-ASv"/>
                         <outlet property="label" destination="Ct8-I8-G6P" id="WRo-Ki-Hte"/>
-                        <outlet property="line" destination="eBi-Dv-jly" id="MOm-hv-QJu"/>
                         <outlet property="progress" destination="pat-sb-Vmj" id="mrH-3r-xoG"/>
                     </connections>
                 </viewController>

@@ -27,7 +27,7 @@ class ProgressViewController: UIViewController {
     var progressVal: Float = 0
     
     
-    var loading = false
+    var waiting = false
     var viewController: UIViewController!
     var progressObject: ProgressObject!
     var inView = false
@@ -48,15 +48,27 @@ class ProgressViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         inView = true
-        self.foregroundView.layer.cornerRadius = 10
-        self.foregroundView.alpha = 0
-        self.backgroundView.alpha = 0
-        self.label.text = labelText
-        self.progress.progress = progressVal
-        UIView.animate(withDuration: 0.3, delay: 0.3, options: .allowAnimatedContent, animations: {
-            self.backgroundView.alpha = 0.4
-            self.foregroundView.alpha = 1
-        })
+        if(waiting){
+            self.foregroundView.layer.cornerRadius = 10
+            self.foregroundView.alpha = 0
+            self.backgroundView.alpha = 0
+            self.label.text = labelText
+            self.activityIndicator.startAnimating()
+            self.progress.progress = progressVal
+            UIView.animate(withDuration: 0.3, delay: 0.3, options: .allowAnimatedContent, animations: {
+                self.backgroundView.alpha = 0.4
+            })
+        }else{
+            self.foregroundView.layer.cornerRadius = 10
+            self.foregroundView.alpha = 0
+            self.backgroundView.alpha = 0
+            self.label.text = labelText
+            self.progress.progress = progressVal
+            UIView.animate(withDuration: 0.3, delay: 0.3, options: .allowAnimatedContent, animations: {
+                self.backgroundView.alpha = 0.4
+                self.foregroundView.alpha = 1
+            })
+        }
     }
     
     func p(){
@@ -66,27 +78,32 @@ class ProgressViewController: UIViewController {
     }
     
     func d(){
+        print("D called")
         UIView.animate(withDuration: 0.4, animations: {
             self.backgroundView.alpha = 0
             self.foregroundView.alpha = 0
         }, completion: { (val) in
             self.dismiss(animated: true) {
-                
+                self.inView = false
             }
         })
     }
     
     func d(callback: @escaping ()->()){
+        
+        print("D Callback called")
         UIView.animate(withDuration: 0.4, animations: {
             self.backgroundView.alpha = 0
             self.foregroundView.alpha = 0
         }, completion: { (val) in
             self.dismiss(animated: true) {
                 callback()
+                self.inView = false
             }
         })
     }
     
+    var prevState = ProgressObject.State.resting
     
     private func updateState(){
         let newState = progressObject.currentState
@@ -94,15 +111,36 @@ class ProgressViewController: UIViewController {
             print("Recieving")
             labelText = "Recieving"
             progressVal = 0
-            self.p()
+            waiting = false
+            //self.p()
+            self.activityIndicator.stopAnimating()
+            self.foregroundView.layer.cornerRadius = 10
+            self.foregroundView.alpha = 0
+            self.label.text = labelText
+            self.progress.progress = progressVal
+            UIView.animate(withDuration: 0.3, delay: 0.3, options: .allowAnimatedContent, animations: {
+                self.foregroundView.alpha = 1
+            })
+            prevState = ProgressObject.State.recieving
         }else if(newState == .sending){
             print("Sending")
             labelText = "Sending"
             progressVal = 0
+            waiting = false
             self.p()
+            
+            prevState = ProgressObject.State.sending
         }else if(newState == .resting){
             print("Resting")
-            self.d()
+            waiting = false
+            if(prevState != ProgressObject.State.recieving && prevState != ProgressObject.State.resting){
+                self.d()
+            }
+            prevState = ProgressObject.State.resting
+        }else if(newState == .waiting){
+            waiting = true
+            self.p()
+            prevState = ProgressObject.State.waiting
         }
     }
     
