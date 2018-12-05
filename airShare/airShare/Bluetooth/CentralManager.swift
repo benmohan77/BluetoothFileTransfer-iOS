@@ -232,8 +232,9 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     let transferCharacteristicUUID = CBUUID.init(string: Device.TransferCharacteristic)
                     let nameCharacteristicUUID = CBUUID.init(string: Device.NameCharacteristic)
                     let centralNameCharacteristicUUID = CBUUID.init(string: Device.CentralNameCharacteristic)
+                    let byteCountCharacteristicUUID = CBUUID.init(string: Device.ByteCountCharacteristic)
                     
-                    peripheral.discoverCharacteristics([transferCharacteristicUUID, nameCharacteristicUUID,centralNameCharacteristicUUID], for: service)
+                    peripheral.discoverCharacteristics([transferCharacteristicUUID, nameCharacteristicUUID,centralNameCharacteristicUUID, byteCountCharacteristicUUID], for: service)
                 }
             }
         }
