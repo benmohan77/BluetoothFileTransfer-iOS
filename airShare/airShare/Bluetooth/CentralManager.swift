@@ -64,7 +64,10 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                         // We can return after calling CBPeripheral.setNotifyValue because CBPeripheralDelegate's
                         // didUpdateNotificationStateForCharacteristic method will be called automatically
                         peripheral.setNotifyValue(false, for: characteristic)
-                        return
+                    }else if characteristic.uuid == CBUUID.init(string: Device.ByteCountCharacteristic) {
+                        // We can return after calling CBPeripheral.setNotifyValue because CBPeripheralDelegate's
+                        // didUpdateNotificationStateForCharacteristic method will be called automatically
+                        peripheral.setNotifyValue(false, for: characteristic)
                     }
                 }
             }
@@ -311,8 +314,10 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             }
         }else if characteristic.uuid == CBUUID(string: Device.ByteCountCharacteristic){
             if let numString = String(data: value, encoding: .utf8){
-                self.byteCount = Int(numString)
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateByteCount"), object: nil)
+                if let byteNum = Int(numString){
+                    self.byteCount = byteNum
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateByteCount"), object: nil)
+                }
             }
         }
         
@@ -327,10 +332,10 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
         
         if characteristic.isNotifying {
             // notification started
-            print("Notification STARTED on characteristic: \(characteristic)")
+            print("Notification STARTED on characteristic: \(characteristic.uuid)")
         } else {
             // notification stopped
-            print("Notification STOPPED on characteristic: \(characteristic)")
+            print("Notification STOPPED on characteristic: \(characteristic.uuid)")
             self.centralManager.cancelPeripheralConnection(peripheral)
         }
         

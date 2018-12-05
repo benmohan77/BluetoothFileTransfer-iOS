@@ -54,7 +54,12 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             
                 let byteNum = String("\(dataToSend?.count)").data(using: .utf8)!
                 
-                let didSend = peripheralManager!.updateValue(byteNum, for: self.byteCountCharacteristic!, onSubscribedCentrals: nil)
+                guard let byteCountCharacteristic = self.byteCountCharacteristic else {
+                    print("No bytecount characteristic available!!!")
+                    return
+                }
+                
+                let didSend = peripheralManager!.updateValue(byteNum, for: byteCountCharacteristic, onSubscribedCentrals: nil)
                 
                 if !didSend{
                     print("Byte Count was not sent")
@@ -111,7 +116,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             // ---- Prepare the next message chunk
             // Determine chunk size
             var amountToSend = dataToSend.count - sendDataIndex
-            print("Next amout to send: \(amountToSend)")
+//            print("Next amout to send: \(amountToSend)")
             
             // we have a 20-byte limit, so if the amount to send is greater than 20, then clamp it down to 20.
             if (amountToSend > Device.notifyMTU) {
@@ -129,7 +134,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             
             // If it didn't work, drop out and wait for the callback
             if !didSend {
-                print("Update Failed")
+//                print("Update Failed")
                 return
             }
             

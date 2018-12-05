@@ -127,7 +127,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @ objc func updateByteCount(){
-        print("Got bytes in the view controller! \(centralManager?.byteCount!)")
+        if let byteCount = centralManager?.byteCount{
+            print("Got bytes in the view controller! \(byteCount)")
+        }
     }
     
     @ objc func requestedFiles(notif: NSNotification){
