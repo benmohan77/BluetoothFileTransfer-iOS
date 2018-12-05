@@ -119,23 +119,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @ objc func updatedData(notif: NSNotification){
-        let alert = UIAlertController(title: "File Received!", message: "Message", preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         let data = centralManager!.myData!
-        let image = UIImage.init(data: data)
-        let maxWidth = image?.size.width
-        let maxHeight = image?.size.height
-        print(maxWidth)
-        print(maxHeight)
-        let imgViewTitle = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
-        imgViewTitle.image = image
-        
-        alert.view.addSubview(imgViewTitle)
-        alert.addAction(action)
-        
-        self.present(alert, animated: true, completion: nil)
-        
-        
+        Helper.alert(data: data, vc: self)
     }
     
     @ objc func requestedFiles(notif: NSNotification){
@@ -158,7 +143,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     let option = PHImageRequestOptions()
                     var thumbnail = UIImage()
                     option.isSynchronous = true
-                    manager.requestImage(for: asset, targetSize: CGSize(width: 200, height: 100), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+                    manager.requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
                         thumbnail = result!
                     })
                     self.peripheralManager?.imageToSend = thumbnail

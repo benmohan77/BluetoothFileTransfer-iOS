@@ -73,6 +73,41 @@ class Helper {
         let standard = UserDefaults.standard
         standard.set(name, forKey: "id_" + id)
     }
+    
+    static func alert(data: Data, vc: UIViewController){
+        if let image = UIImage.init(data: data){
+            let alert = UIAlertController(title: "File Received!", message: "", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+            
+            let imageWidth = image.size.width * 3
+            let imageHeight = image.size.height * 3
+            let alertWidth = alert.view.frame.size.width - 20.0
+            
+            let scale = alertWidth / imageWidth
+            
+            let newHeight = scale * imageHeight
+            let newWidth = scale * imageWidth
+            let imgViewTitle = UIImageView(frame: CGRect(x: 0, y: 55, width: newWidth, height: newHeight))
+            let edges = UIEdgeInsets(top: 0, left: 0, bottom: newHeight, right: newWidth)
+            let newImage = image.resizableImage(withCapInsets: edges)
+            imgViewTitle.image = newImage
+            
+            alert.view.addSubview(imgViewTitle)
+            alert.addAction(action)
+            
+            let desiredHeight: CGFloat = newHeight + 100
+            var height:NSLayoutConstraint = NSLayoutConstraint(item: alert.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: desiredHeight)
+            alert.view.addConstraint(height);
+            print(alert.view.frame.width)
+            
+            vc.present(alert, animated: true, completion: nil)
+//            vc.present(alert, animated: true) {
+//                <#code#>
+//            }
+        }else{
+            //Data not an image
+        }
+    }
 }
 
 public extension UIImage {
