@@ -17,6 +17,7 @@ struct Device {
     static let TransferCharacteristic = "2F016955-E675-49A6-9176-111E2A1CF333"
     static let NameCharacteristic = "2F016955-E675-49A6-9176-111E2A1CF332"
     static let CentralNameCharacteristic = "2F016955-E675-49A6-9176-111E2A1CF331"
+    static let ByteCountCharacteristic = "2F016955-E675-49A6-9176-111E2A1CF330"
     
     // Tags
     static let EOM = "{{{EOM}}}"

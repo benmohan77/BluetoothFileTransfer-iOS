@@ -34,6 +34,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.requestedFiles), name: NSNotification.Name(rawValue: "requestedFiles"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateByteCount), name: NSNotification.Name(rawValue: "updateByteCount"), object: nil)
+        
+        
         collectionView.isScrollEnabled = true
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -138,6 +141,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
+    @ objc func updateByteCount(){
+        print("Got bytes in the view controller! \(centralManager?.byteCount!)")
+    }
+    
     @ objc func requestedFiles(notif: NSNotification){
         let alert = UIAlertController(title: "Send File?", message: "\(peripheralManager?.centralName ?? "Someone") is requesting a file", preferredStyle: .alert)
         
@@ -158,7 +165,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     let option = PHImageRequestOptions()
                     var thumbnail = UIImage()
                     option.isSynchronous = true
-                    manager.requestImage(for: asset, targetSize: CGSize(width: 200, height: 100), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+                    manager.requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
                         thumbnail = result!
                     })
                     self.peripheralManager?.imageToSend = thumbnail
