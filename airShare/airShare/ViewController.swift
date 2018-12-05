@@ -90,6 +90,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let myPeripheral = Array(centralManager!.myPeripherals!.values)[indexPath.row] as? MyPeripheral{
+            
             print("Connecting to \(myPeripheral.name)")
             
             centralManager?.centralManager.connect(myPeripheral.peripheral!, options: nil)
@@ -118,15 +119,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @ objc func updatedData(notif: NSNotification){
-        
-        let alert = UIAlertController(title: "Title", message: "Message", preferredStyle: .alert)
-        
+        let alert = UIAlertController(title: "File Received!", message: "Message", preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
-        
-        var message = String(data: centralManager!.myData!, encoding: .utf8)
-        var data = centralManager!.myData!
-        var image = UIImage.init(data: data)
-        
+        let data = centralManager!.myData!
+        let image = UIImage.init(data: data)
+        let maxWidth = image?.size.width
+        let maxHeight = image?.size.height
+        print(maxWidth)
+        print(maxHeight)
         let imgViewTitle = UIImageView(frame: CGRect(x: 10, y: 10, width: 30, height: 30))
         imgViewTitle.image = image
         
@@ -170,8 +170,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }, selectLimitReached: { (num) in
                 //
             })
-            //Kick off sending data
-            
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
