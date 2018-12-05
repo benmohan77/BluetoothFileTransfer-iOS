@@ -195,7 +195,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
         let service = CBMutableService(type: CBUUID.init(string: Device.TransferService), primary: true)
         
         // add characteristic to the service
-        service.characteristics = [self.nameCharacteristic!, self.transferCharacteristic!, self.centralNameCharacteristic!, self.byteCountCharacteristic!]
+        service.characteristics = [self.nameCharacteristic!, self.byteCountCharacteristic!, self.transferCharacteristic!, self.centralNameCharacteristic!]
         
         // add service to the peripheral manager
         self.peripheralManager?.add(service)
