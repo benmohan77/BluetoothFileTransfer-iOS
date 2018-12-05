@@ -12,6 +12,8 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     var byteCount : Int?
     
+    var progressObject : ProgressObject?
+    
     // MARK: Handling User Interactions
     override init() {
         super.init()
@@ -301,21 +303,27 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             // make sure we have a characteristic value
             if let checkEOM = String(data: value, encoding: String.Encoding.utf8){
                 if checkEOM == Device.EOM{
+                    progressObject?.updateState(newState: ProgressObject.State.resting)
                     print("Finished")
                     myData = dataBuffer as Data
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updatedData"), object: nil)
                     dataBuffer.length = 0
                     self.disconnect()
                 }else{
+                    progressObject?.updateCurrentByteCount(newCurrentByteCount: progressObject!.currentByteCount + 1)
                     dataBuffer.append(value)
                 }
             }else{
+                progressObject?.updateCurrentByteCount(newCurrentByteCount: progressObject!.currentByteCount + 1)
                 dataBuffer.append(value)
             }
         }else if characteristic.uuid == CBUUID(string: Device.ByteCountCharacteristic){
             if let numString = String(data: value, encoding: .utf8){
                 if let byteNum = Int(numString){
                     self.byteCount = byteNum
+                    progressObject?.updateTotalByteCount(newTotalByteCount: byteNum)
+                    progressObject?.updateCurrentByteCount(newCurrentByteCount: 0)
+                    progressObject?.updateState(newState: ProgressObject.State.recieving)
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateByteCount"), object: nil)
                 }
             }
