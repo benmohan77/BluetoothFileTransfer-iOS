@@ -22,6 +22,7 @@ class ProgressObject: NSObject {
         case sending
         case recieving
         case resting
+        case waiting
     }
     var currentState = State.resting
     

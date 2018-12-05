@@ -38,6 +38,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     
     func disconnect() {
+        progressObject?.updateState(newState: .resting)
         // verify we have a peripheral
         guard let peripheral = self.peripheral else {
             print("Peripheral object has not been created yet.")
@@ -190,6 +191,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("Peripheral Connected!!!")
+        progressObject?.updateState(newState: .waiting)
         
         // Stop scanning
         centralManager.stopScan()
