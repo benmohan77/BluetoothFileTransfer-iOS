@@ -47,27 +47,29 @@ class ProgressViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        inView = true
-        if(waiting){
-            self.foregroundView.layer.cornerRadius = 10
-            self.foregroundView.alpha = 0
-            self.backgroundView.alpha = 0
-            self.label.text = labelText
-            self.activityIndicator.startAnimating()
-            self.progress.progress = progressVal
-            UIView.animate(withDuration: 0.3, delay: 0.3, options: .allowAnimatedContent, animations: {
-                self.backgroundView.alpha = 0.4
-            })
-        }else{
-            self.foregroundView.layer.cornerRadius = 10
-            self.foregroundView.alpha = 0
-            self.backgroundView.alpha = 0
-            self.label.text = labelText
-            self.progress.progress = progressVal
-            UIView.animate(withDuration: 0.3, delay: 0.3, options: .allowAnimatedContent, animations: {
-                self.backgroundView.alpha = 0.4
-                self.foregroundView.alpha = 1
-            })
+        DispatchQueue.main.async {
+            self.inView = true
+            if(self.waiting){
+                self.foregroundView.layer.cornerRadius = 10
+                self.foregroundView.alpha = 0
+                self.backgroundView.alpha = 0
+                self.label.text = self.labelText
+                self.activityIndicator.startAnimating()
+                self.progress.progress = self.progressVal
+                UIView.animate(withDuration: 0.3, delay: 0.3, options: .allowAnimatedContent, animations: {
+                    self.backgroundView.alpha = 0.4
+                })
+            }else{
+                self.foregroundView.layer.cornerRadius = 10
+                self.foregroundView.alpha = 0
+                self.backgroundView.alpha = 0
+                self.label.text = self.labelText
+                self.progress.progress = self.progressVal
+                UIView.animate(withDuration: 0.3, delay: 0.3, options: .allowAnimatedContent, animations: {
+                    self.backgroundView.alpha = 0.4
+                    self.foregroundView.alpha = 1
+                })
+            }
         }
     }
     
@@ -79,15 +81,21 @@ class ProgressViewController: UIViewController {
     
     func d(){
         DispatchQueue.main.async {
-            //print("D called")
-            UIView.animate(withDuration: 0.4, animations: {
-                self.backgroundView.alpha = 0
-                self.foregroundView.alpha = 0
-            }, completion: { (val) in
+            if(self.inView){
+                //print("D called")
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.backgroundView.alpha = 0
+                    self.foregroundView.alpha = 0
+                }, completion: { (val) in
+                    self.dismiss(animated: true) {
+                        self.inView = false
+                    }
+                })
+            }else{
                 self.dismiss(animated: true) {
                     self.inView = false
                 }
-            })
+            }
         }
     }
     
@@ -157,14 +165,16 @@ class ProgressViewController: UIViewController {
     }
     
     private func updateByte(){
-        if(inView){
-            let total = progressObject.totalByteCount
-            let current = progressObject.currentByteCount
-            let progress = Double(current) / Double(total)
-            self.progress.progress = Float(progress)
-            //print("\(current) \(total) progress \(progress)")
-        }else{
-            
+        DispatchQueue.main.async {
+            if(self.inView){
+                let total = self.progressObject.totalByteCount
+                let current = self.progressObject.currentByteCount
+                let progress = Double(current) / Double(total)
+                self.progress.progress = Float(progress)
+                //print("\(current) \(total) progress \(progress)")
+            }else{
+                
+            }
         }
     }
     

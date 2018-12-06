@@ -168,8 +168,18 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             }
             
             if(name != "Error"){
-                tempMyPeripheral.name = name
-                myPeripherals![peripheral.identifier.uuidString] = tempMyPeripheral
+                if(name == "Ben"){
+                    for periph in myPeripherals!.values {
+                        if(periph.name != nil && periph.name == "Ben"){
+                            myPeripherals!.removeValue(forKey: periph.peripheral!.identifier.uuidString)
+                        }
+                    }
+                    tempMyPeripheral.name = name
+                    myPeripherals![peripheral.identifier.uuidString] = tempMyPeripheral
+                }else{
+                    tempMyPeripheral.name = name
+                    myPeripherals![peripheral.identifier.uuidString] = tempMyPeripheral
+                }
             }
             
             
