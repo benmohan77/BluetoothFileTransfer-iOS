@@ -105,14 +105,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let impact  = UIImpactFeedbackGenerator()
         impact.impactOccurred()
         
+        
+        print("State: \(progressVC!.progressObject.currentState)")
+        
         if let myPeripheral = Array(centralManager!.myPeripherals!.values)[indexPath.row] as? MyPeripheral{
-            
-            print("Connecting to \(myPeripheral.name)")
-            
+            //print("Connecting to \(myPeripheral.name)")
             centralManager?.centralManager.connect(myPeripheral.peripheral!, options: nil)
+            
             //            myPeripheral.peripheral!.setNotifyValue(true, for: myPeripheral.transferCharacteristic!)
         }else{
-            print("Couldnt find peripheral")
+            //print("Couldnt find peripheral")
         }
     }
     
@@ -122,7 +124,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         block {
             let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime
-            print("\(title):: Time: \(timeElapsed)")
+            //print("\(title):: Time: \(timeElapsed)")
         }
     }
     
@@ -141,7 +143,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @ objc func updateByteCount(){
         if let byteCount = centralManager?.byteCount{
-            print("Got bytes in the view controller! \(byteCount)")
+            //print("Got bytes in the view controller! \(byteCount)")
         }
     }
     
@@ -212,7 +214,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         center.add(request, withCompletionHandler: { (error) in
             if let error = error {
                 // Something went wrong
-                print(error)
+                //print(error)
             }
         })
     }

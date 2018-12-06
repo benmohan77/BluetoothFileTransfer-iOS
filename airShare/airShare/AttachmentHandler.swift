@@ -108,14 +108,14 @@ class AttachmentHandler: NSObject{
                 videoLibrary()
             }
         case .denied:
-            print("permission denied")
+            //print("permission denied")
             self.addAlertForSettings(attachmentTypeEnum)
         case .notDetermined:
-            print("Permission Not Determined")
+            //print("Permission Not Determined")
             PHPhotoLibrary.requestAuthorization({ (status) in
                 if status == PHAuthorizationStatus.authorized{
                     // photo library access given
-                    print("access given")
+                    //print("access given")
                     if attachmentTypeEnum == AttachmentType.camera{
                         self.openCamera()
                     }
@@ -126,12 +126,12 @@ class AttachmentHandler: NSObject{
                         self.videoLibrary()
                     }
                 }else{
-                    print("restriced manually")
+                    //print("restriced manually")
                     self.addAlertForSettings(attachmentTypeEnum)
                 }
             })
         case .restricted:
-            print("permission restricted")
+            //print("permission restricted")
             self.addAlertForSettings(attachmentTypeEnum)
         default:
             break
@@ -219,18 +219,18 @@ extension AttachmentHandler: UIImagePickerControllerDelegate, UINavigationContro
 //        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
 //            self.imagePickedBlock?(image)
 //        } else{
-//            print("Something went wrong in  image")
+//            //print("Something went wrong in  image")
 //        }
 //        
 //        if let videoUrl = info[UIImagePickerControllerMediaURL] as? NSURL{
-//            print("videourl: ", videoUrl)
+//            //print("videourl: ", videoUrl)
 //            //trying compression of video
 //            let data = NSData(contentsOf: videoUrl as URL)!
-//            print("File size before compression: \(Double(data.length / 1048576)) mb")
+//            //print("File size before compression: \(Double(data.length / 1048576)) mb")
 //            compressWithSessionStatusFunc(videoUrl)
 //        }
 //        else{
-//            print("Something went wrong in  video")
+//            //print("Something went wrong in  video")
 //        }
 //        currentVC?.dismiss(animated: true, completion: nil)
 //    }
@@ -254,7 +254,7 @@ extension AttachmentHandler: UIImagePickerControllerDelegate, UINavigationContro
                 guard let compressedData = NSData(contentsOf: compressedURL) else {
                     return
                 }
-                print("File size after compression: \(Double(compressedData.length / 1048576)) mb")
+                //print("File size after compression: \(Double(compressedData.length / 1048576)) mb")
                 
                 DispatchQueue.main.async {
                     self.videoPickedBlock?(compressedURL as NSURL)
@@ -295,7 +295,7 @@ extension AttachmentHandler: UIDocumentMenuDelegate, UIDocumentPickerDelegate{
     
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        print("url", url)
+        //print("url", url)
         self.filePickedBlock?(url)
     }
     

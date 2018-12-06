@@ -35,47 +35,47 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     }
     
     func resetData() {
-        print("Resetting Data...")
+        //print("Resetting Data...")
         currentTextSnapshot = ""
         dataToSend = nil
         sendDataIndex = 0
     }
     
     func captureCurrentText() {
-        print("captureCurrentText")
+        //print("captureCurrentText")
         
         if !sendingTextData {
             count += 1
             if let image = imageToSend {
 
                 if let ogData = image.pngData() {
-                    print("Original: \(ogData.count) bytes")
+                    //print("Original: \(ogData.count) bytes")
                     var newData: Data!
                     if(ogData.count > 50000){
                         let scale =  sqrt ( 50000.0 / CGFloat(ogData.count) )
                         let newWidth = image.size.width * scale
                         let newHeight = image.size.height * scale
-//                        print("Height: \(newHeight) Width: \(newWidth)")
+//                        //print("Height: \(newHeight) Width: \(newWidth)")
                         newData = Helper.resizeImage(image: image, targetSize: CGSize(width: newWidth, height: newHeight)).pngData()!
                     }else{
                         newData = ogData
                     }
-                    print("New     : \(newData.count) bytes")
+                    //print("New     : \(newData.count) bytes")
                     dataToSend = newData
                     sendDataIndex = 0
-//                    print("Total Data to send \(dataToSend!.count)")
+//                    //print("Total Data to send \(dataToSend!.count)")
                     
                     let byteNum = String("\(dataToSend!.count)").data(using: .utf8)!
 
                     guard let byteCountCharacteristic = self.byteCountCharacteristic else {
-                        print("No bytecount characteristic available!!!")
+                        //print("No bytecount characteristic available!!!")
                         return
                     }
                 
                     let didSend = peripheralManager!.updateValue(byteNum, for: byteCountCharacteristic, onSubscribedCentrals: nil)
 
                     if !didSend{
-                        print("Byte Count was not sent")
+                        //print("Byte Count was not sent")
                     }
                     
                     progressObject?.updateTotalByteCount(newTotalByteCount: dataToSend!.count)
@@ -84,30 +84,30 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                 }
             }
         } else {
-            print("Currently sending data. Will wait to capture in a second...")
+            //print("Currently sending data. Will wait to capture in a second...")
         }
     }
     
     func sendTextData() {
         guard let peripheralManager = self.peripheralManager else {
-            print("No peripheral manager!!!")
+            //print("No peripheral manager!!!")
             return
         }
         
         guard let transferCharacteristic = self.transferCharacteristic else {
-            print("No transfer characteristic available!!!")
+            //print("No transfer characteristic available!!!")
             return
         }
         
         // Is it time for the EOM message?
         if sendingEOM {
-//            print("Attempting to send EOM...")
+//            //print("Attempting to send EOM...")
             
             let didSend = peripheralManager.updateValue(Device.EOM.data(using: String.Encoding.utf8)!, for: transferCharacteristic, onSubscribedCentrals: nil)
             
             if didSend {
                 sendingEOM = false
-                print("Image was sent")
+                //print("Image was sent")
                 sendingTextData = false
                 progressObject?.updateState(newState: .resting)
             }
@@ -136,7 +136,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             // Determine chunk size
             var amountToSend = dataToSend.count - sendDataIndex
 
-            //print("Next amout to send: \(amountToSend)")
+            ////print("Next amout to send: \(amountToSend)")
             
             // we have a 20-byte limit, so if the amount to send is greater than 20, then clamp it down to 20.
             if (amountToSend > Device.notifyMTU) {
@@ -154,7 +154,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
             
             // If it didn't work, drop out and wait for the callback
             if !didSend {
-//                print("Update Failed")
+//                //print("Update Failed")
                 progressObject?.updateCurrentByteCount(newCurrentByteCount: self.sendDataIndex)
                 return
             }
@@ -174,7 +174,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
                 if (eomSent) {
                     // If the send was successful, then we're done, otherwise we'll send it next time
                     sendingEOM = false
-                    print("Successfully sent EOM!!!");
+                    //print("Successfully sent EOM!!!");
                     imageToSend = nil
                     
                     // turn off sending flag
@@ -189,14 +189,14 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     }
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
-        print("Peripheral Manager State Updated: \(peripheral.state)")
+        //print("Peripheral Manager State Updated: \(peripheral.state)")
         // bail out if peripheral is not powered on
         if peripheral.state != .poweredOn {
             return
         }
-        peripheralManager?.startAdvertising([CBAdvertisementDataLocalNameKey : (Helper.getName() ?? "Someone"), CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)], CBAdvertisementDataManufacturerDataKey : (Helper.getName()?.data(using: .utf8) ?? "Someone".data(using: .utf8))])
+        peripheralManager?.startAdvertising([CBAdvertisementDataLocalNameKey : (Helper.getName() ?? "Someone"), CBAdvertisementDataServiceUUIDsKey : [CBUUID.init(string: Device.TransferService)]])
         
-        print("Bluetooth is Powered Up!!!")
+        //print("Bluetooth is Powered Up!!!")
         
         // create service characteristics
         self.transferCharacteristic = CBMutableCharacteristic(type: CBUUID.init(string: Device.TransferCharacteristic), properties: .notify, value: nil, permissions: .readable)
@@ -218,7 +218,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
     }
     
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
-        print("Central has subscribed to characteristic: \(characteristic.uuid)")
+        //print("Central has subscribed to characteristic: \(characteristic.uuid)")
     }
     
     func peripheralManagerIsReady(toUpdateSubscribers peripheral: CBPeripheralManager) {
@@ -249,7 +249,7 @@ class PeripheralManager: NSObject, CBPeripheralManagerDelegate {
         let didSend = self.peripheralManager?.updateValue(Device.EOM.data(using: String.Encoding.utf8)!, for: self.transferCharacteristic!, onSubscribedCentrals: nil)
         if didSend! {
             sendingEOM = false
-            print("EOM Sent!!!")
+            //print("EOM Sent!!!")
             sendingTextData = false
         }
     }

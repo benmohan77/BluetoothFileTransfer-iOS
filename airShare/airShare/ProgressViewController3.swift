@@ -79,7 +79,7 @@ class ProgressViewController: UIViewController {
     
     func d(){
         DispatchQueue.main.async {
-            print("D called")
+            //print("D called")
             UIView.animate(withDuration: 0.4, animations: {
                 self.backgroundView.alpha = 0
                 self.foregroundView.alpha = 0
@@ -94,7 +94,7 @@ class ProgressViewController: UIViewController {
     func d(callback: @escaping ()->()){
         DispatchQueue.main.async {
             if(self.inView){
-                print("D Callback called")
+                //print("D Callback called")
                 UIView.animate(withDuration: 0.4, animations: {
                     self.backgroundView.alpha = 0
                     self.foregroundView.alpha = 0
@@ -114,7 +114,8 @@ class ProgressViewController: UIViewController {
     private func updateState(){
         let newState = progressObject.currentState
         if(newState == .recieving){
-            print("Recieving")
+            print("\(prevState) to \(newState)")
+            //print("Recieving")
             labelText = "Recieving"
             progressVal = 0
             waiting = false
@@ -129,7 +130,8 @@ class ProgressViewController: UIViewController {
             })
             prevState = ProgressObject.State.recieving
         }else if(newState == .sending){
-            print("Sending")
+            //print("Sending")
+            print("\(prevState) to \(newState)")
             labelText = "Sending"
             progressVal = 0
             waiting = false
@@ -137,16 +139,20 @@ class ProgressViewController: UIViewController {
             
             prevState = ProgressObject.State.sending
         }else if(newState == .resting){
-            print("Resting")
+            print("\(prevState) to \(newState)")
+            //print("Resting")
             waiting = false
             if(prevState != ProgressObject.State.recieving && prevState != ProgressObject.State.resting){
                 self.d()
             }
             prevState = ProgressObject.State.resting
         }else if(newState == .waiting){
-            waiting = true
-            self.p()
-            prevState = ProgressObject.State.waiting
+            if(newState != prevState){
+                print("\(prevState) to \(newState)")
+                waiting = true
+                self.p()
+                prevState = ProgressObject.State.waiting
+            }
         }
     }
     
@@ -156,7 +162,7 @@ class ProgressViewController: UIViewController {
             let current = progressObject.currentByteCount
             let progress = Double(current) / Double(total)
             self.progress.progress = Float(progress)
-            print("\(current) \(total) progress \(progress)")
+            //print("\(current) \(total) progress \(progress)")
         }else{
             
         }

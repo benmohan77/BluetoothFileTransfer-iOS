@@ -71,7 +71,7 @@ class Helper {
     
     static func set(name: String, id: String){
         if(name == "Someone"){
-            print("NOOOOOOOOOOO")
+            //print("NOOOOOOOOOOO")
         }
         let standard = UserDefaults.standard
         standard.set(name, forKey: "id_" + id)
@@ -100,7 +100,7 @@ class Helper {
             alert.addAction(action)
             
             
-            print(alert.view.frame.width)
+            //print(alert.view.frame.width)
             DispatchQueue.main.async {
                 alert.view.alpha = 0
                 vc.progressVC!.d {

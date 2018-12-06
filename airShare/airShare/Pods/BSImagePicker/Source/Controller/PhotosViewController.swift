@@ -507,7 +507,7 @@ extension PhotosViewController: PHPhotoLibraryChangeObserver {
                     // 4. It flickers when reloading it while being inserted
                     // TODO: FIX
                     //                    if let changed = photosChanges.changedIndexes {
-                    //                        print("changed")
+                    //                        //print("changed")
                     //                        collectionView.reloadItemsAtIndexPaths(changed.bs_indexPathsForSection(1))
                     //                    }
                 } else if photosChanges.hasIncrementalChanges == false {

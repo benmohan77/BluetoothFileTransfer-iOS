@@ -31,7 +31,8 @@ class MiniCollectionViewCell: UICollectionViewCell {
             image.image = getAssetThumbnail(asset: photo.image)
             break
         default:
-            print("Non photo")
+            let _ = 0
+            //print("Non photo")
         }
         
     }
