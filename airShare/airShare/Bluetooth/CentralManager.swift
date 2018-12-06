@@ -164,7 +164,7 @@ class CentralManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                     myPeripherals![peripheral.identifier.uuidString] = tempMyPeripheral
                 }
             }else{
-                name = "Unknown"
+                name = "Ben"
             }
             
             if(name != "Error"){

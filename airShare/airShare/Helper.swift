@@ -45,10 +45,9 @@ class Helper {
         
         // show alert controller
         DispatchQueue.main.async {
-            vc.progressVC!.dismiss(animated: true, completion: {
+            vc.present(alertController, animated: true, completion: {
                 
             })
-            
         }
         
     }
