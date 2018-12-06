@@ -78,31 +78,35 @@ class ProgressViewController: UIViewController {
     }
     
     func d(){
-        print("D called")
-        UIView.animate(withDuration: 0.4, animations: {
-            self.backgroundView.alpha = 0
-            self.foregroundView.alpha = 0
-        }, completion: { (val) in
-            self.dismiss(animated: true) {
-                self.inView = false
-            }
-        })
-    }
-    
-    func d(callback: @escaping ()->()){
-        if(inView){
-            print("D Callback called")
+        DispatchQueue.main.async {
+            print("D called")
             UIView.animate(withDuration: 0.4, animations: {
                 self.backgroundView.alpha = 0
                 self.foregroundView.alpha = 0
             }, completion: { (val) in
                 self.dismiss(animated: true) {
-                    callback()
                     self.inView = false
                 }
             })
         }
-        callback()
+    }
+    
+    func d(callback: @escaping ()->()){
+        DispatchQueue.main.async {
+            if(self.inView){
+                print("D Callback called")
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.backgroundView.alpha = 0
+                    self.foregroundView.alpha = 0
+                }, completion: { (val) in
+                    self.dismiss(animated: true) {
+                        callback()
+                        self.inView = false
+                    }
+                })
+            }
+            callback()
+        }
     }
     
     var prevState = ProgressObject.State.resting
